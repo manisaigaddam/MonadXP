@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { ExternalLink, Twitter, Globe } from 'lucide-react';
+import { ExternalLink, Twitter, Globe, Heart } from 'lucide-react';
 
 const DetailContainer = styled.div`
   padding: 4px;
@@ -100,9 +100,56 @@ const RetroButton = styled.button`
   }
 `;
 
+const FavoriteButton = styled(RetroButton)`
+  flex: 0;
+  width: 40px;
+  color: ${props => props.isFavorite ? '#ff1744' : '#000'};
+  
+  svg {
+    fill: ${props => props.isFavorite ? '#ff1744' : 'none'};
+  }
+`;
+
 export const AppDetail = ({ project }) => {
+  const [isFavorite, setIsFavorite] = useState(() => {
+    // Check if favorite is stored in localStorage
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    return favorites.includes(project.id);
+  });
+
+  // Sync favorite state when project changes or when favorites are updated externally
+  useEffect(() => {
+    const checkFavorite = () => {
+      const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+      setIsFavorite(favorites.includes(project.id));
+    };
+
+    // Check on mount and when project changes
+    checkFavorite();
+
+    // Listen for favorites updates
+    window.addEventListener('favoritesUpdated', checkFavorite);
+    
+    return () => {
+      window.removeEventListener('favoritesUpdated', checkFavorite);
+    };
+  }, [project.id]);
+
   const openLink = (url) => {
     if(url) window.open(url, '_blank');
+  };
+
+  const toggleFavorite = () => {
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    const newFavorites = isFavorite
+      ? favorites.filter(id => id !== project.id)
+      : [...favorites, project.id];
+    
+    localStorage.setItem('favorites', JSON.stringify(newFavorites));
+    setIsFavorite(!isFavorite);
+    
+    // Dispatch custom event to notify Desktop component
+    window.dispatchEvent(new Event('favoritesUpdated'));
   };
 
   return (
@@ -127,6 +174,13 @@ export const AppDetail = ({ project }) => {
           <ExternalLink size={14} />
           <span>CONNECT</span>
         </RetroButton>
+        <FavoriteButton 
+          isFavorite={isFavorite} 
+          onClick={toggleFavorite}
+          title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+        >
+          <Heart size={14} />
+        </FavoriteButton>
         {project.twitter && (
           <RetroButton onClick={() => openLink(project.twitter)} style={{ flex: 0, width: '40px' }}>
             <Twitter size={14} />

@@ -39,8 +39,8 @@ const StartButton = styled.button`
   }
 
   img {
-    width: 20px;
-    height: 20px;
+    width: 32px;
+    height: 32px;
   }
 `;
 

@@ -5,7 +5,7 @@ import { Window } from './Window';
 import { Taskbar } from './Taskbar';
 import { AppDetail } from './AppDetail';
 import { AboutMonad } from './AboutMonad';
-import { TrendingUp, Cpu, Gamepad2, Globe, Folder, Box } from 'lucide-react';
+import { TrendingUp, Cpu, Gamepad2, Globe, Folder, Box, Heart } from 'lucide-react';
 import db from '../data/db.json';
 
 // Pulse animation for watermark
@@ -36,8 +36,8 @@ const DesktopContainer = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 500px;
-    height: 500px;
+    width: 800px;
+    height: 800px;
     background-image: url('/logo.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -97,6 +97,7 @@ const CATEGORIES = [
   { id: 'infra', label: 'Infra', icon: Cpu },
   { id: 'nfts', label: 'NFTs & Gaming', icon: Gamepad2 },
   { id: 'community', label: 'Community', icon: Globe },
+  { id: 'favourites', label: 'Favourites', icon: Heart },
   { id: 'archive', label: 'Archive', icon: Folder },
 ];
 
@@ -104,9 +105,40 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
   const [windows, setWindows] = useState([]);
   const [activeWindowId, setActiveWindowId] = useState(null);
   const [projects, setProjects] = useState([]);
+  const [favorites, setFavorites] = useState(() => {
+    return JSON.parse(localStorage.getItem('favorites') || '[]');
+  });
 
   useEffect(() => {
     setProjects(db);
+  }, []);
+
+  // Listen for storage changes to update favorites
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const newFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+      setFavorites(newFavorites);
+      
+      // Force re-render of open favourites window if it exists
+      setWindows(prevWindows => {
+        return prevWindows.map(win => {
+          if (win.data.category === 'favourites') {
+            // Update the window to trigger re-render
+            return { ...win, updated: Date.now() };
+          }
+          return win;
+        });
+      });
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    // Also listen for custom event from AppDetail when favorites change
+    window.addEventListener('favoritesUpdated', handleStorageChange);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('favoritesUpdated', handleStorageChange);
+    };
   }, []);
 
   const openWindow = (id, type, data = {}) => {
@@ -145,6 +177,10 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
     if (catId === 'archive') {
        return projects.filter(p => !['DeFi', 'Infra', 'NFTs & Gaming', 'Community'].includes(p.category));
     }
+    if (catId === 'favourites') {
+      const favoriteIds = JSON.parse(localStorage.getItem('favorites') || '[]');
+      return projects.filter(p => favoriteIds.includes(p.id));
+    }
     const map = {
       'defi': 'DeFi',
       'infra': 'Infra',
@@ -171,6 +207,8 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
             key={cat.id}
             label={cat.label}
             isFolder={true}
+            CustomIcon={cat.id === 'favourites' ? Heart : undefined}
+            color={cat.id === 'favourites' ? '#ff1744' : undefined}
             onClick={() => openWindow(cat.id, 'folder', { title: cat.label, category: cat.id })}
           />
         ))}
@@ -192,7 +230,7 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
           }
         >
           {win.type === 'folder' && (
-            <WindowContentGrid>
+            <WindowContentGrid key={`${win.data.category}-${favorites.length}`}>
               {getProjectsByCategory(win.data.category).map(p => (
                 <Icon 
                   key={p.id}

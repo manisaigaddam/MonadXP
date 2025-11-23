@@ -100,10 +100,11 @@ export const Icon = ({ label, icon, onClick, selected, color, CustomIcon, isFold
   // Decide which icon to render
   let RenderedIcon;
   
-  if (isFolder) {
-      RenderedIcon = label === 'Archive' ? <PixelArchiveIcon /> : <PixelFolderIcon />;
-  } else if (CustomIcon) {
+  if (CustomIcon) {
+      // CustomIcon takes priority, even for folders
       RenderedIcon = <CustomIcon size={32} color={color} />;
+  } else if (isFolder) {
+      RenderedIcon = label === 'Archive' ? <PixelArchiveIcon /> : <PixelFolderIcon />;
   } else {
       RenderedIcon = <img src={icon} alt={label} />;
   }
