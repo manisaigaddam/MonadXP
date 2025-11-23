@@ -207,8 +207,6 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
             key={cat.id}
             label={cat.label}
             isFolder={true}
-            CustomIcon={cat.id === 'favourites' ? Heart : undefined}
-            color={cat.id === 'favourites' ? '#ff1744' : undefined}
             onClick={() => openWindow(cat.id, 'folder', { title: cat.label, category: cat.id })}
           />
         ))}

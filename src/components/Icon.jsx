@@ -89,6 +89,98 @@ const PixelArchiveIcon = () => (
     </svg>
 );
 
+const PixelFavouritesFolderIcon = () => (
+  <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* Back of folder */}
+    <path d="M2 6H12L14 8H30V26H2V6Z" fill="#E8C766" stroke="black" strokeWidth="1"/>
+    {/* Front of folder (lighter) */}
+    <path d="M2 10H30V26H2V10Z" fill="#FFD700" stroke="black" strokeWidth="1"/>
+    {/* Tab highlight */}
+    <path d="M3 11H29V25H3V11Z" fill="#FFE66D" fillOpacity="0.5"/>
+    {/* Heart icon overlay */}
+    <path 
+      d="M16 23C16 23 11 18 11 15C11 13 12.5 12 14 12C15 12 16 13 16 13C16 13 17 12 18 12C19.5 12 21 13 21 15C21 18 16 23 16 23Z" 
+      fill="#ff1744" 
+      stroke="#000" 
+      strokeWidth="0.5"
+    />
+  </svg>
+);
+
+const PixelDeFiFolderIcon = () => (
+  <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* Back of folder */}
+    <path d="M2 6H12L14 8H30V26H2V6Z" fill="#E8C766" stroke="black" strokeWidth="1"/>
+    {/* Front of folder (lighter) */}
+    <path d="M2 10H30V26H2V10Z" fill="#FFD700" stroke="black" strokeWidth="1"/>
+    {/* Tab highlight */}
+    <path d="M3 11H29V25H3V11Z" fill="#FFE66D" fillOpacity="0.5"/>
+    {/* Chart icon overlay */}
+    <path d="M10 22V18H13V22H10Z" fill="#4CAF50" stroke="#000" strokeWidth="0.5"/>
+    <path d="M14.5 22V15H17.5V22H14.5Z" fill="#4CAF50" stroke="#000" strokeWidth="0.5"/>
+    <path d="M19 22V12H22V22H19Z" fill="#4CAF50" stroke="#000" strokeWidth="0.5"/>
+  </svg>
+);
+
+const PixelInfraFolderIcon = () => (
+  <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* Back of folder */}
+    <path d="M2 6H12L14 8H30V26H2V6Z" fill="#E8C766" stroke="black" strokeWidth="1"/>
+    {/* Front of folder (lighter) */}
+    <path d="M2 10H30V26H2V10Z" fill="#FFD700" stroke="black" strokeWidth="1"/>
+    {/* Tab highlight */}
+    <path d="M3 11H29V25H3V11Z" fill="#FFE66D" fillOpacity="0.5"/>
+    {/* Chip/Server icon overlay */}
+    <rect x="11" y="14" width="10" height="8" fill="#607D8B" stroke="#000" strokeWidth="0.5"/>
+    <path d="M12 16H14V17H12V16Z" fill="#81D4FA"/>
+    <path d="M12 19H14V20H12V19Z" fill="#81D4FA"/>
+    <line x1="9" y1="15" x2="11" y2="15" stroke="#000" strokeWidth="1"/>
+    <line x1="9" y1="17" x2="11" y2="17" stroke="#000" strokeWidth="1"/>
+    <line x1="9" y1="19" x2="11" y2="19" stroke="#000" strokeWidth="1"/>
+    <line x1="21" y1="15" x2="23" y2="15" stroke="#000" strokeWidth="1"/>
+    <line x1="21" y1="17" x2="23" y2="17" stroke="#000" strokeWidth="1"/>
+    <line x1="21" y1="19" x2="23" y2="19" stroke="#000" strokeWidth="1"/>
+  </svg>
+);
+
+const PixelNFTFolderIcon = () => (
+  <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* Back of folder */}
+    <path d="M2 6H12L14 8H30V26H2V6Z" fill="#E8C766" stroke="black" strokeWidth="1"/>
+    {/* Front of folder (lighter) */}
+    <path d="M2 10H30V26H2V10Z" fill="#FFD700" stroke="black" strokeWidth="1"/>
+    {/* Tab highlight */}
+    <path d="M3 11H29V25H3V11Z" fill="#FFE66D" fillOpacity="0.5"/>
+    {/* Game Controller icon overlay */}
+    <path 
+      d="M9 16C9 14.5 10 14 11 14H21C22 14 23 14.5 23 16V19C23 20 22 21 21 21H11C10 21 9 20 9 19V16Z" 
+      fill="#9C27B0" 
+      stroke="#000" 
+      strokeWidth="0.5"
+    />
+    <rect x="11" y="16.5" width="4" height="1" fill="white"/>
+    <rect x="12.5" y="15" width="1" height="4" fill="white"/>
+    <circle cx="19" cy="16.5" r="1" fill="white"/>
+    <circle cx="20.5" cy="18" r="1" fill="white"/>
+  </svg>
+);
+
+const PixelCommunityFolderIcon = () => (
+  <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* Back of folder */}
+    <path d="M2 6H12L14 8H30V26H2V6Z" fill="#E8C766" stroke="black" strokeWidth="1"/>
+    {/* Front of folder (lighter) */}
+    <path d="M2 10H30V26H2V10Z" fill="#FFD700" stroke="black" strokeWidth="1"/>
+    {/* Tab highlight */}
+    <path d="M3 11H29V25H3V11Z" fill="#FFE66D" fillOpacity="0.5"/>
+    {/* Globe/World icon overlay */}
+    <circle cx="16" cy="18" r="5" fill="#2196F3" stroke="#000" strokeWidth="0.5"/>
+    <path d="M11 18H21" stroke="white" strokeWidth="0.5" fill="none"/>
+    <path d="M16 13V23" stroke="white" strokeWidth="0.5" fill="none"/>
+    <ellipse cx="16" cy="18" rx="2.5" ry="5" stroke="white" strokeWidth="0.5" fill="none"/>
+  </svg>
+);
+
 const PixelAppIcon = ({ src, fallbackIcon: Fallback }) => {
     if (src) {
         return <img src={src} alt="icon" onError={(e) => {e.target.style.display='none';}} />;
@@ -104,7 +196,21 @@ export const Icon = ({ label, icon, onClick, selected, color, CustomIcon, isFold
       // CustomIcon takes priority, even for folders
       RenderedIcon = <CustomIcon size={32} color={color} />;
   } else if (isFolder) {
-      RenderedIcon = label === 'Archive' ? <PixelArchiveIcon /> : <PixelFolderIcon />;
+      if (label === 'Archive') {
+        RenderedIcon = <PixelArchiveIcon />;
+      } else if (label === 'Favourites') {
+        RenderedIcon = <PixelFavouritesFolderIcon />;
+      } else if (label === 'DeFi') {
+        RenderedIcon = <PixelDeFiFolderIcon />;
+      } else if (label === 'Infra') {
+        RenderedIcon = <PixelInfraFolderIcon />;
+      } else if (label === 'NFTs & Gaming') {
+        RenderedIcon = <PixelNFTFolderIcon />;
+      } else if (label === 'Community') {
+        RenderedIcon = <PixelCommunityFolderIcon />;
+      } else {
+        RenderedIcon = <PixelFolderIcon />;
+      }
   } else {
       RenderedIcon = <img src={icon} alt={label} />;
   }
