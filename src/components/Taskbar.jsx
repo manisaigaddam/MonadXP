@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { Volume2, Wifi, Battery, ChevronRight, Power, Disc, Info } from 'lucide-react';
+import { Volume2, VolumeX, Wifi, Battery, ChevronRight, Power, Disc, Info, Folder } from 'lucide-react';
 
 const TaskbarContainer = styled.div`
   position: fixed;
@@ -32,6 +32,7 @@ const StartButton = styled.button`
   gap: 8px;
   height: 32px;
   margin-right: 10px;
+  cursor: pointer;
   
   &:active {
     border-color: #000 #fff #fff #000;
@@ -47,7 +48,7 @@ const StartMenu = styled.div`
   position: absolute;
   bottom: 42px;
   left: 2px;
-  width: 200px;
+  width: 240px;
   background: ${props => props.theme.colors.winBackground};
   border: 2px solid;
   border-color: ${props => props.theme.colors.winBorderLight} ${props => props.theme.colors.winBorderDark} ${props => props.theme.colors.winBorderDark} ${props => props.theme.colors.winBorderLight};
@@ -60,7 +61,7 @@ const StartMenu = styled.div`
 
 const MenuSidebar = styled.div`
   background: linear-gradient(180deg, ${props => props.theme.colors.secondary}, ${props => props.theme.colors.primary});
-  width: 30px;
+  width: 36px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -72,7 +73,8 @@ const MenuSidebar = styled.div`
     color: white;
     font-weight: bold;
     font-size: 18px;
-    letter-spacing: 2px;
+    letter-spacing: 4px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
   }
 `;
 
@@ -83,14 +85,15 @@ const MenuContent = styled.div`
 `;
 
 const MenuItem = styled.div`
-  padding: 8px 12px;
+  padding: 10px 12px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   cursor: pointer;
   font-family: ${props => props.theme.fonts.main};
-  font-size: 14px;
+  font-size: 16px;
   color: ${props => props.theme.colors.text};
+  border: 1px solid transparent;
 
   &:hover {
     background: ${props => props.theme.colors.primary};
@@ -98,8 +101,8 @@ const MenuItem = styled.div`
   }
   
   svg {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
   }
 `;
 
@@ -107,7 +110,7 @@ const Divider = styled.div`
   height: 1px;
   background: #999;
   border-bottom: 1px solid #fff;
-  margin: 2px 0;
+  margin: 4px 0;
 `;
 
 const WindowList = styled.div`
@@ -123,12 +126,12 @@ const WindowTab = styled.button`
   background: ${props => props.active ? '#eee' : props.theme.colors.winBackground};
   border: 2px solid;
   border-color: ${props => props.active ? '#000 #fff #fff #000' : '#fff #000 #000 #fff'};
-  /* Dither pattern for active tab if you want extra retro points */
+  /* Dither pattern for active tab */
   background-image: ${props => props.active ? 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAIklEQVQYV2NkYGD4D8SMQAwCcAAoCnGgBAZYyJGRkQGdCgC4OQ4B7l3xrwAAAABJRU5ErkJggg==)' : 'none'};
   color: ${props => props.theme.colors.text};
   padding: 0 10px;
   height: 30px;
-  max-width: 150px;
+  max-width: 160px;
   text-align: left;
   font-family: ${props => props.theme.fonts.main};
   font-size: 14px;
@@ -137,6 +140,7 @@ const WindowTab = styled.button`
   text-overflow: ellipsis;
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   &:active {
     border-color: #000 #fff #fff #000;
@@ -167,7 +171,7 @@ const Clock = () => {
   return <span>{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>;
 };
 
-export const Taskbar = ({ windows, activeWindowId, onWindowClick }) => {
+export const Taskbar = ({ windows, activeWindowId, onWindowClick, onToggleMusic, isMusicPlaying }) => {
   const [startOpen, setStartOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -180,6 +184,17 @@ export const Taskbar = ({ windows, activeWindowId, onWindowClick }) => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  const handleShutdown = () => {
+    // Reload page to simulate restart
+    window.location.reload();
+  };
+
+  const handlePrograms = () => {
+      // Could open a specific folder window, but for now just close menu
+      setStartOpen(false);
+      // You could trigger a callback to open the "Others" folder or similar
+  };
 
   return (
     <TaskbarContainer>
@@ -194,13 +209,21 @@ export const Taskbar = ({ windows, activeWindowId, onWindowClick }) => {
             <div style={{ display: 'flex' }}>
               <MenuSidebar><span>MONAD OS</span></MenuSidebar>
               <MenuContent>
-                <MenuItem><Disc /> Music Player</MenuItem>
-                <MenuItem><Info /> About Monad</MenuItem>
+                <MenuItem onClick={() => { onToggleMusic(); setStartOpen(false); }}>
+                    <Disc /> 
+                    {isMusicPlaying ? 'Stop Music' : 'Play Music'}
+                </MenuItem>
+                <MenuItem onClick={() => setStartOpen(false)}>
+                    <Info /> About Monad
+                </MenuItem>
                 <Divider />
-                <MenuItem><ChevronRight /> Programs</MenuItem>
-                <MenuItem><ChevronRight /> Documents</MenuItem>
+                <MenuItem onClick={handlePrograms}>
+                    <Folder /> All Projects
+                </MenuItem>
                 <Divider />
-                <MenuItem onClick={() => window.location.reload()}><Power /> Shut Down...</MenuItem>
+                <MenuItem onClick={handleShutdown} style={{marginTop: 'auto'}}>
+                    <Power /> Shut Down...
+                </MenuItem>
               </MenuContent>
             </div>
           </StartMenu>
@@ -220,7 +243,9 @@ export const Taskbar = ({ windows, activeWindowId, onWindowClick }) => {
       </WindowList>
       
       <SystemTray>
-        <Volume2 size={16} />
+        <div onClick={onToggleMusic} style={{cursor: 'pointer'}}>
+            {isMusicPlaying ? <Volume2 size={16} /> : <VolumeX size={16} />}
+        </div>
         <Clock />
       </SystemTray>
     </TaskbarContainer>

@@ -10,8 +10,13 @@ import db from '../data/db.json';
 const DesktopContainer = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: ${props => props.theme.colors.background};
-  background-image: radial-gradient(circle at 50% 50%, #1a103c 0%, #0e091c 100%);
+  background-color: ${props => props.theme.colors.desktopBg};
+  /* Optional: Add a subtle grid pattern for retro engineering feel */
+  background-image: 
+    linear-gradient(${props => props.theme.colors.winBorderDark} 1px, transparent 1px),
+    linear-gradient(90deg, ${props => props.theme.colors.winBorderDark} 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center;
   position: relative;
   overflow: hidden;
 `;
@@ -22,26 +27,27 @@ const IconGrid = styled.div`
   flex-wrap: wrap;
   height: calc(100vh - 40px);
   padding: 20px;
-  gap: 20px;
+  gap: 10px;
   align-content: flex-start;
 `;
 
 const WindowContentGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 16px;
+  padding: 16px;
 `;
 
+// Updated Categories to match new logic
 const CATEGORIES = [
   { id: 'defi', label: 'DeFi', icon: TrendingUp },
   { id: 'infra', label: 'Infra', icon: Cpu },
   { id: 'nfts', label: 'NFTs & Gaming', icon: Gamepad2 },
   { id: 'community', label: 'Community', icon: Globe },
-  { id: 'others', label: 'Archive', icon: Folder },
+  { id: 'archive', label: 'Archive', icon: Folder }, // Changed id to match script 'Archive' or 'Others'
 ];
 
-export const Desktop = () => {
+export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
   const [windows, setWindows] = useState([]);
   const [activeWindowId, setActiveWindowId] = useState(null);
   const [projects, setProjects] = useState([]);
@@ -62,7 +68,7 @@ export const Desktop = () => {
       type,
       title: data.title || id,
       data,
-      defaultPosition: { x: 100 + (windows.length * 30), y: 50 + (windows.length * 30) }
+      defaultPosition: { x: 50 + (windows.length * 30), y: 30 + (windows.length * 30) }
     };
 
     setWindows([...windows, newWindow]);
@@ -81,13 +87,16 @@ export const Desktop = () => {
   };
 
   const getProjectsByCategory = (catId) => {
-    if (catId === 'others') {
-      return projects.filter(p => !['DeFi', 'Infra', 'NFTs', 'Community'].includes(p.category));
+    // Map desktop folder IDs to DB categories
+    if (catId === 'archive') {
+       // Catch-all for things not in the main 4
+       return projects.filter(p => !['DeFi', 'Infra', 'NFTs & Gaming', 'Community'].includes(p.category));
     }
+    
     const map = {
       'defi': 'DeFi',
       'infra': 'Infra',
-      'nfts': 'NFTs',
+      'nfts': 'NFTs & Gaming',
       'community': 'Community'
     };
     return projects.filter(p => p.category === map[catId]);
@@ -100,7 +109,8 @@ export const Desktop = () => {
           <Icon 
             key={cat.id}
             label={cat.label}
-            CustomIcon={cat.icon}
+            // We use isFolder prop to trigger the custom pixel folder
+            isFolder={true}
             onClick={() => openWindow(cat.id, 'folder', { title: cat.label, category: cat.id })}
           />
         ))}
@@ -115,7 +125,7 @@ export const Desktop = () => {
           onClose={closeWindow}
           onFocus={() => focusWindow(win.id)}
           defaultPosition={win.defaultPosition}
-          defaultSize={win.type === 'app' ? { width: 400, height: 600 } : { width: 700, height: 500 }}
+          defaultSize={win.type === 'app' ? { width: 400, height: 500 } : { width: 640, height: 480 }}
         >
           {win.type === 'folder' && (
             <WindowContentGrid>
@@ -141,8 +151,9 @@ export const Desktop = () => {
         windows={windows} 
         activeWindowId={activeWindowId} 
         onWindowClick={focusWindow}
+        isMusicPlaying={isMusicPlaying}
+        onToggleMusic={onToggleMusic}
       />
     </DesktopContainer>
   );
 };
-

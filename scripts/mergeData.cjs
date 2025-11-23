@@ -38,35 +38,72 @@ try {
                 if (isPlaceholder && jsonMatch && jsonMatch.img && !jsonMatch.img.includes('placeholder')) {
                     banner = jsonMatch.img;
                 }
+                
+                // Fallback banner if still empty
+                if (!banner || banner.includes('placeholder')) {
+                    banner = 'https://media.giphy.com/media/26tP7axeTIWcO0VrO/giphy.gif'; // Retro static or similar
+                }
 
                 // Clean Tags
-                // CSV "TAGS" column e.g. "Dev,Tooling"
                 let tags = [];
                 if (p.TAGS) {
                     tags = p.TAGS.split(',').map(t => t.trim()).filter(Boolean);
                 }
 
-                // Determine Category folder based on tags/type
-                let category = 'Others';
+                // Robust Categorization Logic
+                let category = 'Archive';
                 const type = p['PJ TYPE'] ? p['PJ TYPE'].toLowerCase() : '';
                 const tagStr = tags.join(' ').toLowerCase();
+                const nameStr = p.NAME.toLowerCase();
 
-                if (tagStr.includes('defi') || tagStr.includes('dex') || tagStr.includes('lending') || tagStr.includes('yield') || type.includes('defi')) {
+                // 1. DeFi & Finance
+                if (
+                    tagStr.includes('defi') || 
+                    tagStr.includes('dex') || 
+                    tagStr.includes('lending') || 
+                    tagStr.includes('yield') || 
+                    tagStr.includes('stablecoin') ||
+                    tagStr.includes('perps') ||
+                    tagStr.includes('trading') ||
+                    type.includes('defi')
+                ) {
                     category = 'DeFi';
-                } else if (tagStr.includes('infra') || tagStr.includes('dev') || tagStr.includes('tooling') || tagStr.includes('oracle') || tagStr.includes('bridge')) {
+                } 
+                // 2. Infrastructure, Wallets, Security, Dev Tools
+                else if (
+                    tagStr.includes('infra') || 
+                    tagStr.includes('dev') || 
+                    tagStr.includes('tooling') || 
+                    tagStr.includes('oracle') || 
+                    tagStr.includes('bridge') || 
+                    tagStr.includes('wallet') || 
+                    tagStr.includes('security') ||
+                    tagStr.includes('rpc') ||
+                    tagStr.includes('explorer') ||
+                    type.includes('infra')
+                ) {
                     category = 'Infra';
-                } else if (tagStr.includes('nft') || tagStr.includes('game') || tagStr.includes('gaming') || tagStr.includes('social') || tagStr.includes('metaverse')) {
-                    category = 'Social'; // "NFTs & Gaming" -> "Social" broadly or "Consumer"
-                } else if (tagStr.includes('wallet') || tagStr.includes('payment')) {
-                    category = 'Infra'; // Wallets are infra usually
-                }
-
-                // Rename "Social" to "Consumer" or keep "Social"
-                // Let's stick to the plan: DeFi, Infra, NFTs/Gaming, Social.
-                // If it matches NFT/Gaming -> "NFTs"
-                if (tagStr.includes('nft') || tagStr.includes('game') || tagStr.includes('gaming')) {
-                    category = 'NFTs';
-                } else if (tagStr.includes('social') || tagStr.includes('community') || tagStr.includes('dao')) {
+                } 
+                // 3. NFTs, Gaming, Metaverse
+                else if (
+                    tagStr.includes('nft') || 
+                    tagStr.includes('game') || 
+                    tagStr.includes('gaming') || 
+                    tagStr.includes('metaverse') || 
+                    tagStr.includes('art') ||
+                    type.includes('game') ||
+                    type.includes('nft')
+                ) {
+                    category = 'NFTs & Gaming';
+                } 
+                // 4. Community, Social, DAO
+                else if (
+                    tagStr.includes('social') || 
+                    tagStr.includes('community') || 
+                    tagStr.includes('dao') || 
+                    tagStr.includes('media') ||
+                    tagStr.includes('marketing')
+                ) {
                     category = 'Community';
                 }
 
@@ -74,7 +111,7 @@ try {
                     id: p.NAME.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase(),
                     name: p.NAME,
                     logo: p.LOGO,
-                    type: p['PJ TYPE'],
+                    type: p['PJ TYPE'] || 'DApp',
                     category: category,
                     tags: tags,
                     twitter: p.X || (jsonMatch ? jsonMatch.twitter : ''),
@@ -101,4 +138,3 @@ try {
 } catch (error) {
     console.error('Error processing data:', error);
 }
-

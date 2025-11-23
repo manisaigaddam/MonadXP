@@ -80,7 +80,7 @@
     "name": "Across Protocol",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68e035994e3c2ccadb2a907a_X-Logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Cross-Chain"
     ],
@@ -95,7 +95,7 @@
     "name": "Acurast",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b910bc10f685d8b1690a43_Acurast_logo.webp",
     "type": "App/Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "DePIN"
     ],
@@ -141,7 +141,7 @@
     "name": "AllDomains",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67e316a9407f35c90acd3348_LoFnPgJa_400x400.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Identity"
     ],
@@ -156,7 +156,7 @@
     "name": "Allium",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b910eaea5cc3512a8a1b8f_Allium_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Analytics"
     ],
@@ -381,7 +381,7 @@
     "name": "Biconomy",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b911a9dec63edfce3e07fb_Biconomy_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Account",
       "Abstraction"
@@ -503,7 +503,7 @@
     "name": "Blockdaemon",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b911f1b0307a90b7b20ade_Blockdaemon_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "RPC"
     ],
@@ -518,7 +518,7 @@
     "name": "Blocklive",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b911fd7f3041834a53238c_Blocklive_logo.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "NFT"
     ],
@@ -533,7 +533,7 @@
     "name": "Breath of Estova",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/687816c09a34ff481b1be028_estova%20logo%20_400x400.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "Gaming"
     ],
@@ -548,7 +548,7 @@
     "name": "Buzzing App",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6878174f5c502efdbed88f8b_buzzing%20qbn4VqZ0_400x400.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "Prediction",
       "Market"
@@ -624,7 +624,7 @@
     "name": "Capa",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68bb689f48ab3c3dcc9c43ff_capa%20logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Onramp"
     ],
@@ -639,7 +639,7 @@
     "name": "Castora",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9127fa1ed529049cc5f52_Castora_logo.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "Prediction",
       "Market"
@@ -655,7 +655,7 @@
     "name": "Catton AI",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67eff2c59b8145c6ecb86f1b_CattonAiTokenLogo_400.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "AI"
     ],
@@ -701,7 +701,7 @@
     "name": "Chainlink",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67c4e79b975a193baa9b8f85_chainlink.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Cross-Chain"
     ],
@@ -761,7 +761,7 @@
     "name": "CoNFT",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67c6400453e750640690be80_conft.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "NFT"
     ],
@@ -791,7 +791,7 @@
     "name": "Coin98 AI Wallet",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b912eaf20a63404b11b01c_Coin98%20AI%20Wallet_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "AI"
     ],
@@ -851,7 +851,7 @@
     "name": "Cult Markets",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6847444702a242ed322515e4_cultL.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "NFT"
     ],
@@ -881,7 +881,7 @@
     "name": "Cycle Network",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91388b126dbefee6fe84d_Cycle%20Network_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Cross-Chain"
     ],
@@ -896,7 +896,7 @@
     "name": "Cyferio",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91393ebe3a25cc1be0cc4_Cyferio_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Privacy"
     ],
@@ -911,7 +911,7 @@
     "name": "DAU Cards",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b913a278f79de0e7a62b38_DAU%20Cards_logo.webp",
     "type": "App",
-    "category": "Infra",
+    "category": "Archive",
     "tags": [
       "Payments"
     ],
@@ -926,7 +926,7 @@
     "name": "DRKVRS",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67d3a1aa464cdce0ecbee499_drkvrs%20jpg.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "Gaming"
     ],
@@ -941,7 +941,7 @@
     "name": "DRPC",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b913b7b9188e59b9a50568_DRPC_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "RPC"
     ],
@@ -971,7 +971,7 @@
     "name": "Defined",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b913c47f3041834a5454df_Defined_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Analytics"
     ],
@@ -986,7 +986,7 @@
     "name": "Demask Finance",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b913d97f3041834a54624e_Demask%20Finance_logo.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "NFT"
     ],
@@ -1017,7 +1017,7 @@
     "name": "Diffuse",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b913ef859d08f0b8d743ef_Diffuse_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Zero-Knowledge"
     ],
@@ -1093,7 +1093,7 @@
     "name": "Dune",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91412f9180e8745b286a5_Dune_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Analytics"
     ],
@@ -1123,7 +1123,7 @@
     "name": "Dynamic",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91426859d08f0b8d76748_Dynamic_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Account",
       "Abstraction"
@@ -1214,7 +1214,7 @@
     "name": "Entangle",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67cb77e4c1b4e4169e9d7662_entangle-logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Cross-Chain"
     ],
@@ -1305,7 +1305,7 @@
     "name": "Fans3 AI",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68782bc80d889748856753b5_fan3%20logo%20DZcQNjA2_400x400.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "AI"
     ],
@@ -1351,7 +1351,7 @@
     "name": "Fiamma",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b914b9e21ffe4d10515b60_Fiamma_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Cross-Chain"
     ],
@@ -1366,7 +1366,7 @@
     "name": "Fizen.io",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b914c07095d061fc67bd32_Fizen.io_logo.webp",
     "type": "App",
-    "category": "Infra",
+    "category": "Archive",
     "tags": [
       "Payments"
     ],
@@ -1396,7 +1396,7 @@
     "name": "Flipside Crypto",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b914d748ee25af9bdf0016_Flipside%20Crypto_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Analytics"
     ],
@@ -1426,7 +1426,7 @@
     "name": "Fonbnk",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68b20be3d17aa8667581bcf4_fonbnk_logo_400x400.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Onramp"
     ],
@@ -1441,7 +1441,7 @@
     "name": "Fortytwo",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b914e98f00b5fa4ab55d6d_Fortytwo_logo.webp",
     "type": "App/Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "AI"
     ],
@@ -1471,7 +1471,7 @@
     "name": "GM Agents",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/687816d9af2f69162a3cf9fc_gm%20logo%20_400x400.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "AI"
     ],
@@ -1486,7 +1486,7 @@
     "name": "Garden",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68ceb77fe2afc590d7d7eb02_pink-1-.png",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Cross-Chain"
     ],
@@ -1516,7 +1516,7 @@
     "name": "Gateway",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91506e21ffe4d1051b443_Gateway_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Privacy"
     ],
@@ -1546,7 +1546,7 @@
     "name": "Gelato",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9150ff0b471b3c1bd3109_Gelato_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Account",
       "Abstraction"
@@ -1577,7 +1577,7 @@
     "name": "Gifted.art",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91522859d08f0b8d80847_Gifted.art_logo.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "NFT"
     ],
@@ -1668,7 +1668,7 @@
     "name": "HaHa Wallet",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9155dc0e02b5b7bf04716_HaHa%20Wallet_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Account",
       "Abstraction"
@@ -1699,7 +1699,7 @@
     "name": "Hawk Terminal",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67e317511e6ed8599a5ea4f7_hawk%20terminal%20logo.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "Gaming"
     ],
@@ -1730,7 +1730,7 @@
     "name": "Henry Labs",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/687816eba60be7a1995ef6ee_henry%20logo%20.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "AI"
     ],
@@ -1760,7 +1760,7 @@
     "name": "Hyperlane",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b915848f00b5fa4ab5ff20_Hyperlane_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Cross-Chain"
     ],
@@ -1820,7 +1820,7 @@
     "name": "Index Network",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68d6e931940f75ea0a8764e7_Frame-777.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Identity"
     ],
@@ -1835,7 +1835,7 @@
     "name": "Jenius",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6883e319c7dc648610d7a0d4_jenius1.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "AI"
     ],
@@ -1865,7 +1865,7 @@
     "name": "KINETK",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68ceb780c0d89aa11d07ec76_KINETK-Logo.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "AI"
     ],
@@ -1910,7 +1910,7 @@
     "name": "Kingdomly",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6883ea2d90ec8f542c785833_kingdom%20logo.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "NFT"
     ],
@@ -1970,7 +1970,7 @@
     "name": "Kodeus AI",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68ceb77ff5972224015058a3_kodeus-favicon-white.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "AI"
     ],
@@ -1985,7 +1985,7 @@
     "name": "Koywe",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68b20be38a9f4a238e4ca7eb_Koywe_Icon_400x400_koywe.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Onramp"
     ],
@@ -2075,7 +2075,7 @@
     "name": "LI.FI",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68ceb780e6d195deeeed6da7_lifi_pfp.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Cross-Chain"
     ],
@@ -2090,7 +2090,7 @@
     "name": "LayerZero",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9160a6561ec94bfa44b63_LayerZero_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Cross-Chain"
     ],
@@ -2105,7 +2105,7 @@
     "name": "Layerhub",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68f69b4cc576152375cc74ac_group_1000002444_1x.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Analytics"
     ],
@@ -2120,7 +2120,7 @@
     "name": "Leap Wallet",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91613d821392f193e089c_Leap%20Wallet_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Account",
       "Abstraction"
@@ -2136,7 +2136,7 @@
     "name": "Legends of Elysium",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6802d4ad83a262e9bc52444f_zejJW5VI_400x400.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "Gaming"
     ],
@@ -2197,7 +2197,7 @@
     "name": "LootGO",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9163ce0429ca00f50873e_LootGO_logo.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "Gaming"
     ],
@@ -2212,7 +2212,7 @@
     "name": "Lootify",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67bebc5c47f06f070fbb11bd_lootify.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "Gaming"
     ],
@@ -2227,7 +2227,7 @@
     "name": "Lumiterra",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/689f814d36a7d97c9a6b7bd8_logo.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "AI"
     ],
@@ -2242,7 +2242,7 @@
     "name": "M0narch",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6883e31a85ccb6f309a67727_4-01.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "Betting"
     ],
@@ -2272,7 +2272,7 @@
     "name": "MERV",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9164ba00e125f94a0513b_MERV_logo.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "AI"
     ],
@@ -2332,7 +2332,7 @@
     "name": "Magic Eden",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9165fb9188e59b9a6f675_Magic%20Eden_logo.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "NFT"
     ],
@@ -2362,7 +2362,7 @@
     "name": "Mahjong123",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9166ed821392f193e4fd5_Mahjong123_logo.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "Gaming"
     ],
@@ -2392,7 +2392,7 @@
     "name": "Mentaport",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67eff2c59473541e98a5deb4_mentaport-logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Identity"
     ],
@@ -2422,7 +2422,7 @@
     "name": "Meta Leap",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9167a9fa4892d62373abc_Meta%20Leap_logo.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "Gaming"
     ],
@@ -2437,7 +2437,7 @@
     "name": "MetaKeep",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b916858330a99a870f5bdc_MetaKeep_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Account",
       "Abstraction"
@@ -2453,7 +2453,7 @@
     "name": "Mflo",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68d6e931832086d684a61615_Mflo_logo_400x.webp",
     "type": "App",
-    "category": "Infra",
+    "category": "Archive",
     "tags": [
       "Payments"
     ],
@@ -2468,7 +2468,7 @@
     "name": "MindAgentsAI",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68e96f51ceca150235bab079_IMG_8830.jpeg",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "AI"
     ],
@@ -2483,7 +2483,7 @@
     "name": "Mintpad",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9168df6998cf242076fa0_Mintpad_logo.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "NFT"
     ],
@@ -2498,7 +2498,7 @@
     "name": "MonadExplorer by BlockVision",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b916a989130464ea421461_MonadExplorer%20by%20BlockVision_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Analytics"
     ],
@@ -2513,7 +2513,7 @@
     "name": "Monadata AI",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b916ba84cbdc367d63b09c_Monadata%20AI_logo.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "AI"
     ],
@@ -2588,7 +2588,7 @@
     "name": "Mozi",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91713c0e02b5b7bf17fa6_Mozi_logo.webp",
     "type": "App/Infra",
-    "category": "Community",
+    "category": "Infra",
     "tags": [
       "Social"
     ],
@@ -2633,7 +2633,7 @@
     "name": "Multisynq",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6878165ed21cf891079ce3c7_multisynq%20logo%20kxXecY0r_400x400.webp",
     "type": "App/Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "DePIN"
     ],
@@ -2663,7 +2663,7 @@
     "name": "NFTs2Me",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b917409fa4892d6237dc33_NFTs2Me_logo.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "NFT"
     ],
@@ -2678,7 +2678,7 @@
     "name": "NXTchain",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68f69b4c2914de7af9a367b0_NXTchain_Monad_LOGO.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "DePIN"
     ],
@@ -2723,7 +2723,7 @@
     "name": "NadSmith",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9175d84cbdc367d64277c_NadSmith_logo.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "AI"
     ],
@@ -2783,7 +2783,7 @@
     "name": "Nillion",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9177f779fac86351cf9da_Nillion_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "AI"
     ],
@@ -2798,7 +2798,7 @@
     "name": "Nitro by Router Protocol",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9178c02389168368647c9_Nitro%20by%20Router%20Protocol_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Cross-Chain"
     ],
@@ -2828,7 +2828,7 @@
     "name": "Nomas Wallet",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b917a1f0b471b3c1becebb_Nomas%20Wallet_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Account",
       "Abstraction"
@@ -2891,7 +2891,7 @@
     "name": "Nubila",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68e035995a5f630974e62baa_nubila_logo_400-400.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "AI"
     ],
@@ -2921,7 +2921,7 @@
     "name": "OKX Explorer",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b917bcd9acff4898219311_OKX%20Explorer_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Analytics"
     ],
@@ -2951,7 +2951,7 @@
     "name": "OSL Pay",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68fe71a61a4eecacc687e166_D_h84D3s_400x400.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Onramp"
     ],
@@ -2981,7 +2981,7 @@
     "name": "Omnia",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6878162dca7c1699923aaaba_omnia_400x400.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "NFT"
     ],
@@ -3026,7 +3026,7 @@
     "name": "OpenSea",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b917e1c3ad7da1ddf47a5b_OpenSea_logo.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "NFT"
     ],
@@ -3041,7 +3041,7 @@
     "name": "Orbiter Finance",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b917eee21ffe4d1053ae79_Orbiter%20Finance_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Cross-Chain"
     ],
@@ -3086,7 +3086,7 @@
     "name": "Outpost Surge",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67e316a927462cd6dc6aa4ad_logo-os.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "Gaming"
     ],
@@ -3116,7 +3116,7 @@
     "name": "PLAY Network",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9181d8f00b5fa4ab7a863_PLAY%20Network_logo.webp",
     "type": "App/Infra",
-    "category": "NFTs",
+    "category": "Infra",
     "tags": [
       "Gaming"
     ],
@@ -3177,7 +3177,7 @@
     "name": "Para",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9190489130464ea441071_Para_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Account",
       "Abstraction"
@@ -3223,7 +3223,7 @@
     "name": "Permute Finance",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68e96f513a156f995f3de133_Logo-WebP-400x400-.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Cross-Chain"
     ],
@@ -3268,7 +3268,7 @@
     "name": "Pimlico",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9191884cbdc367d659a3d_Pimlico_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Account",
       "Abstraction"
@@ -3314,7 +3314,7 @@
     "name": "PolyFlow",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6878157fd689191cf9e81382_polyfi%20logo_400x400.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "RWA"
     ],
@@ -3329,7 +3329,7 @@
     "name": "Poply",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67cb75a56fa2925b3b2e9a89_popy-logo.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "NFT"
     ],
@@ -3374,7 +3374,7 @@
     "name": "Primus",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9193884cbdc367d65b04b_Primus_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Zero-Knowledge"
     ],
@@ -3389,7 +3389,7 @@
     "name": "Privy",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b919421610ca8a55c5fc53_Privy_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Account",
       "Abstraction"
@@ -3405,7 +3405,7 @@
     "name": "Proof-of-Skill",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67cb7895e1046bc1bf640a67__0FqUZLR_400x400.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "Other",
       "Apps"
@@ -3436,7 +3436,7 @@
     "name": "PumpBTC",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91e8ee0429ca00f558bb8_PumpBTC%20logo.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "AI"
     ],
@@ -3481,7 +3481,7 @@
     "name": "QuickNode",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9195a048c532f61e234ea_QuickNode_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "RPC"
     ],
@@ -3511,7 +3511,7 @@
     "name": "RareBetSports",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91971779fac86351e9c4d_RareBetSports_logo.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "Betting"
     ],
@@ -3526,7 +3526,7 @@
     "name": "Rayvo",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6878156edcbd1ae880b0885f_rayvo%20Td0jPvVW_400x400.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "DePIN"
     ],
@@ -3556,7 +3556,7 @@
     "name": "Redbrick",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9198c739963115550368b_Redbrick_logo.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "Gaming"
     ],
@@ -3571,7 +3571,7 @@
     "name": "Relend Network",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6883e31c7521ac0c5bd871ac_relend-logo-monad.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "DeFi",
     "tags": [
       "Stablecoin"
     ],
@@ -3601,7 +3601,7 @@
     "name": "Reown",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b919a50238916836880556_Reown_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Account",
       "Abstraction"
@@ -3632,7 +3632,7 @@
     "name": "RgbClash",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/683481011635632a6270ac56_center_filled.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "Gaming"
     ],
@@ -3647,7 +3647,7 @@
     "name": "Rhino.fi",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b919bb7399631155504fcc_Rhino.fi_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Cross-Chain"
     ],
@@ -3692,7 +3692,7 @@
     "name": "Rumi",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68781565fc16fe318bea11a7_rumi%20zPdVic8R_400x400.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "AI"
     ],
@@ -3752,7 +3752,7 @@
     "name": "Scatter.art",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6883f79d5ed6d256a4153b15_scatter%20logo%20.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "NFT"
     ],
@@ -3767,7 +3767,7 @@
     "name": "Sela Network",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68966d42336d11a6c5b329ea_sela%20logo%20.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "DePIN"
     ],
@@ -3797,7 +3797,7 @@
     "name": "Showdown",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b919f86e9a2707acfe0c32_Showdown_logo.webp",
     "type": "App/Infra",
-    "category": "NFTs",
+    "category": "Infra",
     "tags": [
       "Gaming"
     ],
@@ -3827,7 +3827,7 @@
     "name": "SkyTrade",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91a2c1610ca8a55c6a07c_SkyTrade_logo.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "RWA"
     ],
@@ -3993,7 +3993,7 @@
     "name": "Sunscreen",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6863135baa6db2d22d376c0a_Sunscreen-Logos-Social-Frame.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Privacy"
     ],
@@ -4053,7 +4053,7 @@
     "name": "T3rn",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/680607ae08a85d835012cafc_t3rn%20logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Cross-Chain"
     ],
@@ -4098,7 +4098,7 @@
     "name": "Tally",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91af25075b90f168cabc6_Tally_logo.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "Governance"
     ],
@@ -4144,7 +4144,7 @@
     "name": "Tezza Poker",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/682f7caa4bd8615922bce6a0_tezza.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "Gaming"
     ],
@@ -4174,7 +4174,7 @@
     "name": "The Vape Labs",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91b0afc64a6c6e43e7e17_The%20Vape%20Labs_logo.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "DePIN"
     ],
@@ -4189,7 +4189,7 @@
     "name": "Thirdweb",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91b13f6998cf2420a9d1d_Thirdweb_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Account",
       "Abstraction"
@@ -4250,7 +4250,7 @@
     "name": "TownSquare",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91b27b9188e59b9aa8b6a_TowneSquare_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Account",
       "Abstraction"
@@ -4281,7 +4281,7 @@
     "name": "Triton One",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91b39c1a6a111c72292a6_Triton%20One_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "RPC"
     ],
@@ -4296,7 +4296,7 @@
     "name": "Turnkey",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91b43d821392f19422bcd_Turnkey_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Account",
       "Abstraction"
@@ -4372,7 +4372,7 @@
     "name": "Valor Quest",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6834a1e5bc93ee52da7849c0_6834a1646afb796987d92c9d_Logo.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "Gaming"
     ],
@@ -4387,7 +4387,7 @@
     "name": "Web3Auth",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91b9211a6f589667ebd18_Web3Auth_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Account",
       "Abstraction"
@@ -4434,7 +4434,7 @@
     "name": "Wormhole",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91bb383812f23336ed80b_Wormhole_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Cross-Chain"
     ],
@@ -4449,7 +4449,7 @@
     "name": "X2C",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6893d9cb3aa0c3e58d29e9c6_x2c-icon.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "Gaming"
     ],
@@ -4494,7 +4494,7 @@
     "name": "YieldKingZ",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91bd2c1a6a111c7231095_YieldKingZ_logo.webp",
     "type": "App",
-    "category": "NFTs",
+    "category": "NFTs & Gaming",
     "tags": [
       "Gaming"
     ],
@@ -4509,7 +4509,7 @@
     "name": "Zapry",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67c4e8357ff1995988316264_zapry%20(1).webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "AI"
     ],
@@ -4539,7 +4539,7 @@
     "name": "ZeroDev",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91bef84cbdc367d67b771_ZeroDev_logo.webp",
     "type": "Infra",
-    "category": "Others",
+    "category": "Infra",
     "tags": [
       "Account",
       "Abstraction"
@@ -4570,7 +4570,7 @@
     "name": "dFusion AI",
     "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68cebe8f33d4d7940f9a4dfb_dfusion%20logo%20.webp",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "AI"
     ],
@@ -4584,12 +4584,12 @@
     "id": "not-in-eco-dir",
     "name": "NOT IN ECO DIR",
     "logo": "",
-    "type": "",
-    "category": "Others",
+    "type": "DApp",
+    "category": "Archive",
     "tags": [],
     "twitter": "",
     "website": "",
-    "banner": "",
+    "banner": "https://media.giphy.com/media/26tP7axeTIWcO0VrO/giphy.gif",
     "description": "",
     "onMonad": false
   },
@@ -4598,7 +4598,7 @@
     "name": "NadXBT",
     "logo": "https://pbs.twimg.com/profile_images/1925020110844264451/YSXqPvRR_400x400.jpg",
     "type": "App",
-    "category": "Others",
+    "category": "Archive",
     "tags": [
       "AI"
     ],
