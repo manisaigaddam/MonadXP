@@ -1,53 +1,70 @@
 import React from 'react';
 import { Rnd } from 'react-rnd';
 import styled from 'styled-components';
-import { X, Minus, Maximize2 } from 'lucide-react';
+import { X, Minus, Square } from 'lucide-react';
 
 const WindowContainer = styled.div`
   width: 100%;
   height: 100%;
-  background: ${props => props.theme.colors.surfaceTrans};
-  border: 1px solid ${props => props.theme.colors.border};
-  border-radius: 8px;
+  background: ${props => props.theme.colors.winBackground};
+  border: 2px solid;
+  /* The Retro Bevel Look */
+  border-color: ${props => props.theme.colors.winBorderLight} ${props => props.theme.colors.winBorderDark} ${props => props.theme.colors.winBorderDark} ${props => props.theme.colors.winBorderLight};
   box-shadow: ${props => props.theme.shadows.window};
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  backdrop-filter: blur(10px);
 `;
 
 const TitleBar = styled.div`
   height: 32px;
-  background: ${props => props.isActive ? props.theme.colors.primary : '#333'};
-  color: white;
+  /* Gradient Title Bar */
+  background: linear-gradient(90deg, ${props => props.isActive ? props.theme.colors.primary : '#666'}, ${props => props.isActive ? props.theme.colors.secondary : '#333'});
+  color: ${props => props.theme.colors.textInvert};
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 8px;
-  cursor: default; /* Handle drag handled by Rnd */
+  padding: 0 4px;
+  cursor: default;
   font-family: ${props => props.theme.fonts.header};
-  font-size: 14px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  user-select: none;
+`;
+
+const TitleText = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
   font-weight: bold;
-  transition: background 0.2s;
+  padding-left: 4px;
 `;
 
 const Controls = styled.div`
   display: flex;
-  gap: 8px;
+  gap: 2px;
 `;
 
-const ControlButton = styled.button`
-  background: none;
-  border: none;
-  color: white;
-  padding: 2px;
-  border-radius: 4px;
+const RetroButton = styled.button`
+  width: 20px;
+  height: 20px;
+  background: ${props => props.theme.colors.winBackground};
+  border: 1px solid;
+  border-color: #fff #000 #000 #fff; /* Outset */
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
+  
+  &:active {
+    border-color: #000 #fff #fff #000; /* Inset */
+    transform: translate(1px, 1px);
+  }
 
-  &:hover {
-    background: rgba(255,255,255,0.2);
+  svg {
+    color: #000;
+    width: 12px;
+    height: 12px;
   }
 `;
 
@@ -55,12 +72,11 @@ const Content = styled.div`
   flex: 1;
   overflow: auto;
   position: relative;
-  background: ${props => props.isTerminal ? '#000' : 'transparent'};
-  color: ${props => props.isTerminal ? '#0f0' : 'inherit'};
+  padding: 2px;
 `;
 
 export const Window = ({ 
-  id, title, children, isActive, onClose, onFocus, defaultSize, defaultPosition, isTerminal 
+  id, title, children, isActive, onClose, onFocus, defaultSize, defaultPosition 
 }) => {
   return (
     <Rnd
@@ -80,20 +96,22 @@ export const Window = ({
     >
       <WindowContainer onClick={(e) => e.stopPropagation()}>
         <TitleBar isActive={isActive} className="window-handle">
-          <span>{title}</span>
+          <TitleText>
+             {/* Tiny Monad Logo if needed, or just text */}
+             {title}
+          </TitleText>
           <Controls>
-            <ControlButton><Minus size={14} /></ControlButton>
-            <ControlButton><Maximize2 size={14} /></ControlButton>
-            <ControlButton onClick={(e) => { e.stopPropagation(); onClose(id); }}>
-              <X size={14} />
-            </ControlButton>
+            <RetroButton><Minus /></RetroButton>
+            <RetroButton><Square size={10} /></RetroButton>
+            <RetroButton onClick={(e) => { e.stopPropagation(); onClose(id); }}>
+              <X />
+            </RetroButton>
           </Controls>
         </TitleBar>
-        <Content isTerminal={isTerminal}>
+        <Content>
           {children}
         </Content>
       </WindowContainer>
     </Rnd>
   );
 };
-

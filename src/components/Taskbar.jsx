@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { Volume2, Wifi, Battery } from 'lucide-react';
+import { Volume2, Wifi, Battery, ChevronRight, Power, Disc, Info } from 'lucide-react';
 
 const TaskbarContainer = styled.div`
   position: fixed;
@@ -8,114 +8,205 @@ const TaskbarContainer = styled.div`
   left: 0;
   width: 100%;
   height: 40px;
-  background: rgba(14, 9, 28, 0.85);
-  backdrop-filter: blur(10px);
-  border-top: 1px solid ${props => props.theme.colors.border};
+  background: ${props => props.theme.colors.winBackground};
+  border-top: 2px solid ${props => props.theme.colors.winBorderLight};
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 2px;
   z-index: ${props => props.theme.zIndices.taskbar};
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
 `;
 
 const StartButton = styled.button`
-  background: linear-gradient(90deg, ${props => props.theme.colors.primary}, ${props => props.theme.colors.accent});
-  border: none;
-  color: white;
-  padding: 4px 12px;
-  border-radius: 4px;
+  background: ${props => props.active ? props.theme.colors.winBackground : props.theme.colors.winBackground};
+  border: 2px solid;
+  border-color: ${props => props.active ? '#000 #fff #fff #000' : '#fff #000 #000 #fff'};
+  color: ${props => props.theme.colors.text};
+  padding: 4px 10px;
   font-weight: bold;
   font-family: ${props => props.theme.fonts.header};
-  font-size: 14px;
+  font-size: 16px;
   display: flex;
   align-items: center;
-  gap: 5px;
-  box-shadow: 0 0 10px ${props => props.theme.colors.primary}80;
+  gap: 8px;
+  height: 32px;
   margin-right: 10px;
   
-  &:hover {
-    filter: brightness(1.1);
+  &:active {
+    border-color: #000 #fff #fff #000;
   }
 
-  &:active {
-    transform: scale(0.98);
+  img {
+    width: 20px;
+    height: 20px;
   }
 `;
 
-const WindowList = styled.div`
+const StartMenu = styled.div`
+  position: absolute;
+  bottom: 42px;
+  left: 2px;
+  width: 200px;
+  background: ${props => props.theme.colors.winBackground};
+  border: 2px solid;
+  border-color: ${props => props.theme.colors.winBorderLight} ${props => props.theme.colors.winBorderDark} ${props => props.theme.colors.winBorderDark} ${props => props.theme.colors.winBorderLight};
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  z-index: ${props => props.theme.zIndices.startMenu};
+  padding: 2px;
+`;
+
+const MenuSidebar = styled.div`
+  background: linear-gradient(180deg, ${props => props.theme.colors.secondary}, ${props => props.theme.colors.primary});
+  width: 30px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 10px;
+  
+  span {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+`;
+
+const MenuContent = styled.div`
   flex: 1;
   display: flex;
-  align-items: center;
-  padding: 0 10px;
-  gap: 5px;
-  overflow-x: auto;
-  
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  flex-direction: column;
 `;
 
-const WindowTab = styled.button`
-  background: ${props => props.active ? 'rgba(255,255,255,0.1)' : 'transparent'};
-  border: none;
-  border-bottom: 2px solid ${props => props.active ? props.theme.colors.primary : 'transparent'};
-  color: ${props => props.theme.colors.textLight};
-  padding: 0 12px;
-  height: 38px;
-  max-width: 200px;
-  text-align: left;
-  font-family: ${props => props.theme.fonts.main};
-  font-size: 12px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+const MenuItem = styled.div`
+  padding: 8px 12px;
   display: flex;
   align-items: center;
-  transition: background 0.2s;
+  gap: 10px;
+  cursor: pointer;
+  font-family: ${props => props.theme.fonts.main};
+  font-size: 14px;
+  color: ${props => props.theme.colors.text};
 
   &:hover {
-    background: rgba(255,255,255,0.05);
+    background: ${props => props.theme.colors.primary};
+    color: white;
   }
-`;
-
-const SystemTray = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  color: ${props => props.theme.colors.textLight};
-  font-size: 12px;
-  font-family: ${props => props.theme.fonts.mono};
-  padding-right: 10px;
-  padding-left: 10px;
-  border-left: 1px solid rgba(255,255,255,0.1);
-
+  
   svg {
     width: 16px;
     height: 16px;
   }
 `;
 
+const Divider = styled.div`
+  height: 1px;
+  background: #999;
+  border-bottom: 1px solid #fff;
+  margin: 2px 0;
+`;
+
+const WindowList = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 4px;
+  overflow-x: auto;
+`;
+
+const WindowTab = styled.button`
+  background: ${props => props.active ? '#eee' : props.theme.colors.winBackground};
+  border: 2px solid;
+  border-color: ${props => props.active ? '#000 #fff #fff #000' : '#fff #000 #000 #fff'};
+  /* Dither pattern for active tab if you want extra retro points */
+  background-image: ${props => props.active ? 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAIklEQVQYV2NkYGD4D8SMQAwCcAAoCnGgBAZYyJGRkQGdCgC4OQ4B7l3xrwAAAABJRU5ErkJggg==)' : 'none'};
+  color: ${props => props.theme.colors.text};
+  padding: 0 10px;
+  height: 30px;
+  max-width: 150px;
+  text-align: left;
+  font-family: ${props => props.theme.fonts.main};
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+
+  &:active {
+    border-color: #000 #fff #fff #000;
+  }
+`;
+
+const SystemTray = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px;
+  border-left: 2px solid #999;
+  border-right: 2px solid #fff;
+  height: 32px;
+  margin-right: 2px;
+  background: #ccc;
+  box-shadow: inset 1px 1px 0 #000;
+  font-family: ${props => props.theme.fonts.mono};
+  font-size: 14px;
+`;
+
 const Clock = () => {
   const [time, setTime] = useState(new Date());
-
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
-
-  return (
-    <span>
-      {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-    </span>
-  );
+  return <span>{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>;
 };
 
 export const Taskbar = ({ windows, activeWindowId, onWindowClick }) => {
+  const [startOpen, setStartOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setStartOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
     <TaskbarContainer>
-      <StartButton>
-        <span>MONAD</span>
-      </StartButton>
+      <div ref={menuRef}>
+        <StartButton active={startOpen} onClick={() => setStartOpen(!startOpen)}>
+           <img src="https://monad.xyz/logo.svg" alt="M" onError={(e) => e.target.style.display='none'} /> 
+           <span>Start</span>
+        </StartButton>
+        
+        {startOpen && (
+          <StartMenu>
+            <div style={{ display: 'flex' }}>
+              <MenuSidebar><span>MONAD OS</span></MenuSidebar>
+              <MenuContent>
+                <MenuItem><Disc /> Music Player</MenuItem>
+                <MenuItem><Info /> About Monad</MenuItem>
+                <Divider />
+                <MenuItem><ChevronRight /> Programs</MenuItem>
+                <MenuItem><ChevronRight /> Documents</MenuItem>
+                <Divider />
+                <MenuItem onClick={() => window.location.reload()}><Power /> Shut Down...</MenuItem>
+              </MenuContent>
+            </div>
+          </StartMenu>
+        )}
+      </div>
+
       <WindowList>
         {windows.map(win => (
           <WindowTab 
@@ -127,13 +218,11 @@ export const Taskbar = ({ windows, activeWindowId, onWindowClick }) => {
           </WindowTab>
         ))}
       </WindowList>
+      
       <SystemTray>
-        <Wifi />
-        <Volume2 />
-        <Battery size={16} />
+        <Volume2 size={16} />
         <Clock />
       </SystemTray>
     </TaskbarContainer>
   );
 };
-

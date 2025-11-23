@@ -1,33 +1,45 @@
 export const theme = {
   colors: {
-    primary: '#6E54FF',    // Monad Purple
-    secondary: '#85E6FF',  // Monad Cyan/Blue
-    accent: '#FF8EE4',     // Monad Pink
-    background: '#0E091C', // Deep Violet/Black
-    surface: '#FFFFFF',
-    surfaceTrans: 'rgba(255, 255, 255, 0.95)',
-    surfaceDark: '#1A1528',
-    text: '#000000',
-    textLight: '#FFFFFF',
-    grey: '#cccccc',
-    border: '#DDD7FE',
-    folder: '#FFD700', // Gold-ish for folder icons if we use CSS icons
+    // Official Monad Palette & Retro Variations
+    primary: '#836EF9',    // Monad Purple (Base)
+    primaryDark: '#5F4BB6',
+    primaryLight: '#A796FF',
+    
+    secondary: '#200052',  // Monad Blue/Dark Background
+    accent: '#A0055D',     // Monad Berry
+    
+    offWhite: '#FBFAF9',   // Monad Off-White
+    black: '#0E100F',      // Monad Black
+    
+    // Retro UI Colors
+    winBorderLight: '#D8D0F2', // Highlight bevel
+    winBorderDark: '#4A3880',  // Shadow bevel
+    winBackground: '#E6E2F3',  // Window grey-purple
+    
+    desktopBg: '#200052',
+    
+    text: '#0E100F',
+    textInvert: '#FBFAF9',
+    
+    folder: '#FFD700',
   },
   fonts: {
-    main: "'Inter', sans-serif",
+    main: "'Pixel', 'Courier New', monospace", // Fallback to mono for retro feel
+    header: "'Pixel', 'Courier New', monospace", 
     mono: "'Roboto Mono', monospace",
-    header: "'Inter', sans-serif",
   },
   shadows: {
-    window: '0 15px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1)',
-    icon: '0 4px 4px rgba(0,0,0,0.3)',
+    // The classic "3D" bevel look
+    outset: 'inset 2px 2px 0px #D8D0F2, inset -2px -2px 0px #4A3880',
+    inset: 'inset 2px 2px 0px #4A3880, inset -2px -2px 0px #D8D0F2',
+    window: '4px 4px 10px rgba(0,0,0,0.5)',
   },
   zIndices: {
     desktop: 1,
     window: 10,
-    popup: 100,
     taskbar: 1000,
+    startMenu: 1001,
     boot: 9999,
+    crt: 10000, // Overlay needs to be on top
   }
 };
-
