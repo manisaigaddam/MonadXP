@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Rnd } from 'react-rnd';
 import styled from 'styled-components';
 import { X, Minus, Square } from 'lucide-react';
@@ -76,19 +76,76 @@ const Content = styled.div`
 `;
 
 export const Window = ({ 
-  id, title, children, isActive, onClose, onFocus, defaultSize, defaultPosition 
+  id, title, children, isActive, isMaximized, onClose, onFocus, onMinimize, onMaximize, defaultSize, defaultPosition 
 }) => {
+  const [position, setPosition] = useState({
+    x: defaultPosition?.x || 100,
+    y: defaultPosition?.y || 50
+  });
+  const [size, setSize] = useState({
+    width: defaultSize?.width || 600,
+    height: defaultSize?.height || 400
+  });
+  const [savedPosition, setSavedPosition] = useState(null);
+  const [savedSize, setSavedSize] = useState(null);
+
+  useEffect(() => {
+    if (isMaximized) {
+      // Save current position and size before maximizing
+      if (!savedPosition) {
+        setSavedPosition(position);
+        setSavedSize(size);
+      }
+      // Maximize to full screen (minus taskbar)
+      setPosition({ x: 0, y: 0 });
+      setSize({ width: window.innerWidth, height: window.innerHeight - 40 });
+    } else if (savedPosition && savedSize) {
+      // Restore saved position and size
+      setPosition(savedPosition);
+      setSize(savedSize);
+      setSavedPosition(null);
+      setSavedSize(null);
+    }
+  }, [isMaximized]);
+
+  const handleMinimize = (e) => {
+    e.stopPropagation();
+    if (onMinimize) onMinimize(id);
+  };
+
+  const handleMaximize = (e) => {
+    e.stopPropagation();
+    if (onMaximize) onMaximize(id);
+  };
+
+  const handleClose = (e) => {
+    e.stopPropagation();
+    onClose(id);
+  };
+
   return (
     <Rnd
-      default={{
-        x: defaultPosition?.x || 100,
-        y: defaultPosition?.y || 50,
-        width: defaultSize?.width || 600,
-        height: defaultSize?.height || 400,
+      position={position}
+      size={size}
+      onDragStop={(e, d) => {
+        if (!isMaximized) {
+          setPosition({ x: d.x, y: d.y });
+        }
       }}
-      minWidth={300}
-      minHeight={200}
+      onResizeStop={(e, direction, ref, delta, position) => {
+        if (!isMaximized) {
+          setSize({
+            width: ref.offsetWidth,
+            height: ref.offsetHeight
+          });
+          setPosition({ x: position.x, y: position.y });
+        }
+      }}
+      minWidth={isMaximized ? undefined : 300}
+      minHeight={isMaximized ? undefined : 200}
       bounds="parent"
+      disableDragging={isMaximized}
+      disableResizing={isMaximized}
       onDragStart={onFocus}
       onClick={onFocus}
       dragHandleClassName="window-handle"
@@ -101,9 +158,13 @@ export const Window = ({
              {title}
           </TitleText>
           <Controls>
-            <RetroButton><Minus /></RetroButton>
-            <RetroButton><Square size={10} /></RetroButton>
-            <RetroButton onClick={(e) => { e.stopPropagation(); onClose(id); }}>
+            <RetroButton onClick={handleMinimize} title="Minimize">
+              <Minus />
+            </RetroButton>
+            <RetroButton onClick={handleMaximize} title={isMaximized ? "Restore" : "Maximize"}>
+              <Square size={10} />
+            </RetroButton>
+            <RetroButton onClick={handleClose} title="Close">
               <X />
             </RetroButton>
           </Controls>
