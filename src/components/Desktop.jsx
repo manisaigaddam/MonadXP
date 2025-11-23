@@ -4,6 +4,7 @@ import { Icon } from './Icon';
 import { Window } from './Window';
 import { Taskbar } from './Taskbar';
 import { AppDetail } from './AppDetail';
+import { AboutMonad } from './AboutMonad';
 import { TrendingUp, Cpu, Gamepad2, Globe, Folder, Box } from 'lucide-react';
 import db from '../data/db.json';
 
@@ -11,7 +12,6 @@ const DesktopContainer = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: ${props => props.theme.colors.desktopBg};
-  /* Optional: Add a subtle grid pattern for retro engineering feel */
   background-image: 
     linear-gradient(${props => props.theme.colors.winBorderDark} 1px, transparent 1px),
     linear-gradient(90deg, ${props => props.theme.colors.winBorderDark} 1px, transparent 1px);
@@ -19,6 +19,40 @@ const DesktopContainer = styled.div`
   background-position: center;
   position: relative;
   overflow: hidden;
+  
+  /* Centered Logo Watermark - Using local file */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    background-image: url('/logo.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.1; /* Watermark style */
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Wallpaper Overlay */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/wallpaper.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.2; /* Blend wallpaper with grid/color */
+    pointer-events: none;
+    z-index: 0;
+  }
 `;
 
 const IconGrid = styled.div`
@@ -29,6 +63,8 @@ const IconGrid = styled.div`
   padding: 20px;
   gap: 10px;
   align-content: flex-start;
+  position: relative;
+  z-index: 1;
 `;
 
 const WindowContentGrid = styled.div`
@@ -38,13 +74,12 @@ const WindowContentGrid = styled.div`
   padding: 16px;
 `;
 
-// Updated Categories to match new logic
 const CATEGORIES = [
   { id: 'defi', label: 'DeFi', icon: TrendingUp },
   { id: 'infra', label: 'Infra', icon: Cpu },
   { id: 'nfts', label: 'NFTs & Gaming', icon: Gamepad2 },
   { id: 'community', label: 'Community', icon: Globe },
-  { id: 'archive', label: 'Archive', icon: Folder }, // Changed id to match script 'Archive' or 'Others'
+  { id: 'archive', label: 'Archive', icon: Folder },
 ];
 
 export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
@@ -57,7 +92,6 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
   }, []);
 
   const openWindow = (id, type, data = {}) => {
-    // If window already exists, focus it
     if (windows.find(w => w.id === id)) {
       setActiveWindowId(id);
       return;
@@ -87,12 +121,12 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
   };
 
   const getProjectsByCategory = (catId) => {
-    // Map desktop folder IDs to DB categories
+    if (catId === 'all') {
+        return projects;
+    }
     if (catId === 'archive') {
-       // Catch-all for things not in the main 4
        return projects.filter(p => !['DeFi', 'Infra', 'NFTs & Gaming', 'Community'].includes(p.category));
     }
-    
     const map = {
       'defi': 'DeFi',
       'infra': 'Infra',
@@ -102,6 +136,15 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
     return projects.filter(p => p.category === map[catId]);
   };
 
+  // Handler for Taskbar/Start Menu actions
+  const handleOpenSpecial = (action) => {
+      if (action === 'about') {
+          openWindow('about-monad', 'about', { title: 'About Monad XP' });
+      } else if (action === 'all-projects') {
+          openWindow('all-projects', 'folder', { title: 'All Programs', category: 'all' });
+      }
+  };
+
   return (
     <DesktopContainer onClick={() => setActiveWindowId(null)}>
       <IconGrid onClick={(e) => e.stopPropagation()}>
@@ -109,7 +152,6 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
           <Icon 
             key={cat.id}
             label={cat.label}
-            // We use isFolder prop to trigger the custom pixel folder
             isFolder={true}
             onClick={() => openWindow(cat.id, 'folder', { title: cat.label, category: cat.id })}
           />
@@ -125,7 +167,11 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
           onClose={closeWindow}
           onFocus={() => focusWindow(win.id)}
           defaultPosition={win.defaultPosition}
-          defaultSize={win.type === 'app' ? { width: 400, height: 500 } : { width: 640, height: 480 }}
+          defaultSize={
+              win.type === 'app' ? { width: 400, height: 500 } : 
+              win.type === 'about' ? { width: 550, height: 600 } :
+              { width: 640, height: 480 }
+          }
         >
           {win.type === 'folder' && (
             <WindowContentGrid>
@@ -134,7 +180,6 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
                   key={p.id}
                   label={p.name}
                   icon={p.logo}
-                  // Use generic icon if no logo
                   CustomIcon={!p.logo ? Box : undefined}
                   onClick={() => openWindow(`app-${p.id}`, 'app', { title: p.name, project: p })}
                 />
@@ -143,6 +188,9 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
           )}
           {win.type === 'app' && (
             <AppDetail project={win.data.project} />
+          )}
+          {win.type === 'about' && (
+            <AboutMonad />
           )}
         </Window>
       ))}
@@ -153,6 +201,7 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
         onWindowClick={focusWindow}
         isMusicPlaying={isMusicPlaying}
         onToggleMusic={onToggleMusic}
+        onOpenSpecial={handleOpenSpecial}
       />
     </DesktopContainer>
   );

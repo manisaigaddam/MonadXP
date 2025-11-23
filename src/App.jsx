@@ -4,36 +4,54 @@ import { theme } from './theme';
 import { GlobalStyle } from './styles/GlobalStyle';
 import { Desktop } from './components/Desktop';
 import { BootScreen } from './components/BootScreen';
-import { Taskbar } from './components/Taskbar'; // Import Taskbar here to pass music props if needed, but Desktop handles it usually.
-// Actually Desktop renders Taskbar. We need to pass music state down.
 
-// Simple Synthwave Loop (Placeholder URL - Replace with a real one)
-const MUSIC_URL = "https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=synthwave-80s-110045.mp3"; 
+// A new, direct-link Synthwave track from a reliable source (or self-hosted if this fails, but Pixabay direct links are usually okay for dev)
+// Alternative: https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/KieLoKaz/Free_Ganymed/KieLoKaz_-_01_-_Reunion_of_the_Spaceducks.mp3
+const MUSIC_URL = "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/KieLoKaz/Free_Ganymed/KieLoKaz_-_01_-_Reunion_of_the_Spaceducks.mp3";
 
 function App() {
   const [booted, setBooted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef(new Audio(MUSIC_URL));
+  const audioRef = useRef(null);
 
   useEffect(() => {
-      audioRef.current.loop = true;
-      audioRef.current.volume = 0.4;
+    audioRef.current = new Audio(MUSIC_URL);
+    audioRef.current.loop = true;
+    audioRef.current.volume = 0.4;
+    
+    // Handle potential load errors
+    audioRef.current.addEventListener('error', (e) => {
+        console.error("Audio load error", e);
+    });
+
+    return () => {
+        if(audioRef.current) {
+            audioRef.current.pause();
+            audioRef.current = null;
+        }
+    };
   }, []);
 
   const toggleMusic = () => {
+      if (!audioRef.current) return;
+
       if (isPlaying) {
           audioRef.current.pause();
       } else {
-          audioRef.current.play().catch(e => console.log("Audio play failed", e));
+          const playPromise = audioRef.current.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.log("Audio play prevented:", error);
+                // If auto-play blocked, we update state to match reality
+                setIsPlaying(false);
+            });
+          }
       }
       setIsPlaying(!isPlaying);
   };
 
-  // Auto-play music on boot? Maybe better to let user choose or auto-play if interaction allowed.
   const handleBootComplete = () => {
       setBooted(true);
-      // Optional: Try to play music on boot
-      // audioRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
   };
 
   return (

@@ -171,7 +171,7 @@ const Clock = () => {
   return <span>{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>;
 };
 
-export const Taskbar = ({ windows, activeWindowId, onWindowClick, onToggleMusic, isMusicPlaying }) => {
+export const Taskbar = ({ windows, activeWindowId, onWindowClick, onToggleMusic, isMusicPlaying, onOpenSpecial }) => {
   const [startOpen, setStartOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -186,39 +186,42 @@ export const Taskbar = ({ windows, activeWindowId, onWindowClick, onToggleMusic,
   }, []);
 
   const handleShutdown = () => {
-    // Reload page to simulate restart
     window.location.reload();
   };
 
   const handlePrograms = () => {
-      // Could open a specific folder window, but for now just close menu
+      onOpenSpecial('all-projects');
       setStartOpen(false);
-      // You could trigger a callback to open the "Others" folder or similar
+  };
+
+  const handleAbout = () => {
+      onOpenSpecial('about');
+      setStartOpen(false);
   };
 
   return (
     <TaskbarContainer>
       <div ref={menuRef}>
         <StartButton active={startOpen} onClick={() => setStartOpen(!startOpen)}>
-           <img src="https://monad.xyz/logo.svg" alt="M" onError={(e) => e.target.style.display='none'} /> 
-           <span>Start</span>
+           <img src="/logo.png" alt="XP" onError={(e) => e.target.src='https://monad.xyz/logo.svg'} /> 
+           <span>XP</span>
         </StartButton>
         
         {startOpen && (
           <StartMenu>
             <div style={{ display: 'flex' }}>
-              <MenuSidebar><span>MONAD OS</span></MenuSidebar>
+              <MenuSidebar><span>MONAD XP</span></MenuSidebar>
               <MenuContent>
                 <MenuItem onClick={() => { onToggleMusic(); setStartOpen(false); }}>
                     <Disc /> 
                     {isMusicPlaying ? 'Stop Music' : 'Play Music'}
                 </MenuItem>
-                <MenuItem onClick={() => setStartOpen(false)}>
+                <MenuItem onClick={handleAbout}>
                     <Info /> About Monad
                 </MenuItem>
                 <Divider />
                 <MenuItem onClick={handlePrograms}>
-                    <Folder /> All Projects
+                    <Folder /> All Programs
                 </MenuItem>
                 <Divider />
                 <MenuItem onClick={handleShutdown} style={{marginTop: 'auto'}}>

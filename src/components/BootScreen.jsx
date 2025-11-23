@@ -63,7 +63,7 @@ const MONAD_ASCII = `
  | |  | | |__| | |\\  |  / ___ \\| |_| |
  |_|  |_|\\____/|_| \\_| /_/   \\_\\____/ 
                                       
-      G M O N A D   O S   v 1 . 0
+      G M O N A D   X P   v 1 . 0
 `;
 
 export const BootScreen = ({ onComplete }) => {
@@ -97,29 +97,31 @@ export const BootScreen = ({ onComplete }) => {
     // Memory Count Effect
     const memInterval = setInterval(() => {
         setMem(prev => {
-            if (prev >= 16384) {
+            if (prev >= 32768) { // 32GB RAM for Monad
                 clearInterval(memInterval);
-                return 16384;
+                return 32768;
             }
-            return prev + 256;
+            return prev + 512;
         });
-    }, 20);
+    }, 15);
 
     const sequence = [
-      { text: 'GMONAD BIOS (C) 2025 Monad Labs Inc.', delay: 100 },
+      { text: 'MONAD XP BIOS (C) 2025 Monad Labs Inc.', delay: 100 },
       { text: 'BIOS Date 11/23/25 19:43:00 Ver 1.0.0', delay: 200 },
-      { text: `CPU: MONAD QUANTUM CORE - 10,000 TPS DETECTED`, delay: 500 },
-      { text: '', delay: 1000 }, // Wait for mem
-      { text: 'Memory Test: 16384K OK', delay: 1500 },
-      { text: 'Detecting Primary Master ... GMONAD_FS (NVMe)', delay: 2000 },
-      { text: 'Detecting Primary Slave  ... DEFI_L1 (Hyperlane)', delay: 2200 },
-      { text: 'Detecting Parallel Execution Engines... OK', delay: 2500 },
-      { text: '', delay: 2800 },
-      { text: 'Booting from Hard Disk...', delay: 3200 },
+      { text: `CPU: MONAD SUPERSCALAR PIPELINE - 10,000 TPS`, delay: 500 },
+      { text: '', delay: 1000 }, 
+      { text: 'Memory Test: 32768K OK', delay: 1500 },
+      { text: 'Initializing MonadBFT Consensus Layer...', delay: 2000 },
+      { text: 'Allocating Async IO Ring Buffers...', delay: 2200 },
+      { text: 'Optimizing MonadDb Merkle Patricia Trie... OK', delay: 2500 },
+      { text: 'Pipeline Stage: DEFERRED EXECUTION... ENABLED', delay: 2800 },
+      { text: '', delay: 3000 },
+      { text: 'Booting from Hard Disk...', delay: 3400 },
       { text: 'Loading Kernel...', delay: 3800, sound: 100 },
-      { text: 'Mounting Volumes...', delay: 4200 },
-      { text: 'Initializing Gmonad Desktop Environment...', delay: 5000 },
-      { text: 'Ready.', delay: 5500 },
+      { text: 'Mounting MonadDb Volumes...', delay: 4200 },
+      { text: '> /dev/monad0: clean, 10000/10000 TPS', delay: 4500 },
+      { text: '> Starting MonadXP Desktop Environment...', delay: 4800 },
+      { text: 'Ready.', delay: 5200 },
     ];
 
     let timeouts = [];
@@ -132,7 +134,7 @@ export const BootScreen = ({ onComplete }) => {
       }, delay));
     });
 
-    const finishTimeout = setTimeout(onComplete, 6000);
+    const finishTimeout = setTimeout(onComplete, 5800);
 
     return () => {
       timeouts.forEach(clearTimeout);
@@ -145,17 +147,15 @@ export const BootScreen = ({ onComplete }) => {
   return (
     <Container onClick={() => playSound(440)}>
       <HeaderLine>
-        <span>GMONAD BIOS v1.0</span>
+        <span>MONAD XP BIOS v1.0</span>
         <span>Energy Star Ally</span>
       </HeaderLine>
       <LogoAscii>{MONAD_ASCII}</LogoAscii>
       
-      {/* Render existing lines */}
       {lines.map((line, i) => (
         <Line key={i}>{line}</Line>
       ))}
 
-      {/* Render Memory Count only if not yet in lines (hacky visual sync) */}
       {lines.length < 5 && (
           <Line>Memory Test: {mem}K</Line>
       )}
