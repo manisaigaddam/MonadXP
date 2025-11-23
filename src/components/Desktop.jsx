@@ -142,7 +142,14 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
   }, []);
 
   const openWindow = (id, type, data = {}) => {
-    if (windows.find(w => w.id === id)) {
+    const existingWindow = windows.find(w => w.id === id);
+    if (existingWindow) {
+      // If window is minimized, restore it
+      if (existingWindow.minimized) {
+        setWindows(windows.map(w => 
+          w.id === id ? { ...w, minimized: false } : w
+        ));
+      }
       setActiveWindowId(id);
       return;
     }
@@ -152,7 +159,11 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
       type,
       title: data.title || id,
       data,
-      defaultPosition: { x: 50 + (windows.length * 30), y: 30 + (windows.length * 30) }
+      defaultPosition: { x: 50 + (windows.length * 30), y: 30 + (windows.length * 30) },
+      minimized: false,
+      maximized: false,
+      savedPosition: null,
+      savedSize: null
     };
 
     setWindows([...windows, newWindow]);
@@ -167,6 +178,34 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
   };
 
   const focusWindow = (id) => {
+    // If window is minimized, restore it first
+    const window = windows.find(w => w.id === id);
+    if (window && window.minimized) {
+      setWindows(windows.map(w => 
+        w.id === id ? { ...w, minimized: false } : w
+      ));
+    }
+    setActiveWindowId(id);
+  };
+
+  const minimizeWindow = (id) => {
+    setWindows(windows.map(w => 
+      w.id === id ? { ...w, minimized: true } : w
+    ));
+    // If minimized window was active, focus another window or clear focus
+    if (activeWindowId === id) {
+      const otherWindows = windows.filter(w => w.id !== id && !w.minimized);
+      setActiveWindowId(otherWindows.length > 0 ? otherWindows[otherWindows.length - 1].id : null);
+    }
+  };
+
+  const maximizeWindow = (id) => {
+    setWindows(windows.map(w => {
+      if (w.id === id) {
+        return { ...w, maximized: !w.maximized };
+      }
+      return w;
+    }));
     setActiveWindowId(id);
   };
 
@@ -212,19 +251,22 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
         ))}
       </IconGrid>
 
-      {windows.map(win => (
+      {windows.filter(win => !win.minimized).map(win => (
         <Window
           key={win.id}
           id={win.id}
           title={win.title}
           isActive={activeWindowId === win.id}
+          isMaximized={win.maximized}
           onClose={closeWindow}
           onFocus={() => focusWindow(win.id)}
+          onMinimize={minimizeWindow}
+          onMaximize={maximizeWindow}
           defaultPosition={win.defaultPosition}
           defaultSize={
-              win.type === 'app' ? { width: 400, height: 500 } : 
-              win.type === 'about' ? { width: 550, height: 600 } :
-              { width: 640, height: 480 }
+            win.type === 'app' ? { width: 400, height: 500 } : 
+            win.type === 'about' ? { width: 550, height: 600 } :
+            { width: 640, height: 480 }
           }
         >
           {win.type === 'folder' && (
