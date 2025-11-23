@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Icon } from './Icon';
 import { Window } from './Window';
 import { Taskbar } from './Taskbar';
@@ -8,10 +8,19 @@ import { AboutMonad } from './AboutMonad';
 import { TrendingUp, Cpu, Gamepad2, Globe, Folder, Box } from 'lucide-react';
 import db from '../data/db.json';
 
+// Pulse animation for watermark
+const pulse = keyframes`
+  0% { opacity: 0.15; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.25; transform: translate(-50%, -50%) scale(1.02); }
+  100% { opacity: 0.15; transform: translate(-50%, -50%) scale(1); }
+`;
+
 const DesktopContainer = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: ${props => props.theme.colors.desktopBg};
+  
+  /* The Grid Pattern */
   background-image: 
     linear-gradient(${props => props.theme.colors.winBorderDark} 1px, transparent 1px),
     linear-gradient(90deg, ${props => props.theme.colors.winBorderDark} 1px, transparent 1px);
@@ -20,38 +29,47 @@ const DesktopContainer = styled.div`
   position: relative;
   overflow: hidden;
   
-  /* Centered Logo Watermark - Using local file */
+  /* Centered Logo Watermark - Glowing and more visible */
   &::before {
     content: '';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
-    height: 400px;
+    width: 500px;
+    height: 500px;
     background-image: url('/logo.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    opacity: 0.1; /* Watermark style */
+    opacity: 0.2; /* Increased visibility */
+    filter: drop-shadow(0 0 20px rgba(131, 110, 249, 0.5)); /* Purple Glow */
     pointer-events: none;
     z-index: 0;
+    animation: ${pulse} 8s infinite ease-in-out;
   }
 
-  /* Wallpaper Overlay */
+  /* Wallpaper Overlay - Cool Boundary Glow Effect */
   &::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 60px; /* Space for Taskbar */
     background-image: url('/wallpaper.png');
     background-size: cover;
     background-position: center;
-    opacity: 0.2; /* Blend wallpaper with grid/color */
+    opacity: 0.3; /* Increased visibility */
     pointer-events: none;
     z-index: 0;
+    
+    /* Cool Border Glow */
+    border: 1px solid rgba(131, 110, 249, 0.3);
+    box-shadow: 
+      0 0 30px rgba(131, 110, 249, 0.2),
+      inset 0 0 50px rgba(0, 0, 0, 0.8); /* Vignette */
+    border-radius: 8px;
   }
 `;
 
@@ -60,7 +78,7 @@ const IconGrid = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   height: calc(100vh - 40px);
-  padding: 20px;
+  padding: 40px; /* Moved slightly to avoid border */
   gap: 10px;
   align-content: flex-start;
   position: relative;
