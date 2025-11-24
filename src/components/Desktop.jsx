@@ -5,6 +5,8 @@ import { Window } from './Window';
 import { Taskbar } from './Taskbar';
 import { AppDetail } from './AppDetail';
 import { AboutMonad } from './AboutMonad';
+import { Settings } from './Settings';
+import { KeoneHacker } from './KeoneHacker';
 import { TrendingUp, Cpu, Gamepad2, Globe, Folder, Box, Heart } from 'lucide-react';
 import db from '../data/db.json';
 
@@ -107,6 +109,15 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
   const [projects, setProjects] = useState([]);
   const [favorites, setFavorites] = useState(() => {
     return JSON.parse(localStorage.getItem('favorites') || '[]');
+  });
+  const [hoveredApp, setHoveredApp] = useState(null); // NEW STATE
+  const [typingSoundEnabled, setTypingSoundEnabled] = useState(() => {
+    const saved = localStorage.getItem('typingSoundEnabled');
+    return saved !== null ? JSON.parse(saved) : true; // Default to enabled
+  });
+  const [typingBoxesEnabled, setTypingBoxesEnabled] = useState(() => {
+    const saved = localStorage.getItem('typingBoxesEnabled');
+    return saved !== null ? JSON.parse(saved) : true; // Default to enabled
   });
 
   useEffect(() => {
@@ -233,13 +244,39 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
   const handleOpenSpecial = (action) => {
       if (action === 'about') {
           openWindow('about-monad', 'about', { title: 'About Monad XP' });
+      } else if (action === 'settings') {
+          openWindow('settings', 'settings', { title: 'Settings' });
       } else if (action === 'all-projects') {
           openWindow('all-projects', 'folder', { title: 'All Programs', category: 'all' });
       }
   };
 
+  // New Handler for app hover
+  const handleAppHover = (project) => {
+    setHoveredApp(project);
+  };
+
+  // Handlers for typing settings
+  const handleToggleTypingSound = () => {
+    const newValue = !typingSoundEnabled;
+    setTypingSoundEnabled(newValue);
+    localStorage.setItem('typingSoundEnabled', JSON.stringify(newValue));
+  };
+
+  const handleToggleTypingBoxes = () => {
+    const newValue = !typingBoxesEnabled;
+    setTypingBoxesEnabled(newValue);
+    localStorage.setItem('typingBoxesEnabled', JSON.stringify(newValue));
+  };
+
   return (
     <DesktopContainer onClick={() => setActiveWindowId(null)}>
+      {/* Add Keone Background Component */}
+      <KeoneHacker 
+        hoveredApp={hoveredApp} 
+        typingSoundEnabled={typingSoundEnabled}
+        typingBoxesEnabled={typingBoxesEnabled}
+      />
       <IconGrid onClick={(e) => e.stopPropagation()}>
         {CATEGORIES.map(cat => (
           <Icon 
@@ -247,6 +284,8 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
             label={cat.label}
             isFolder={true}
             onClick={() => openWindow(cat.id, 'folder', { title: cat.label, category: cat.id })}
+            onMouseEnter={() => handleAppHover({ id: cat.id, name: cat.label })}
+            onMouseLeave={() => handleAppHover(null)}
           />
         ))}
       </IconGrid>
@@ -266,6 +305,7 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
           defaultSize={
             win.type === 'app' ? { width: 400, height: 500 } : 
             win.type === 'about' ? { width: 550, height: 600 } :
+            win.type === 'settings' ? { width: 600, height: 500 } :
             { width: 640, height: 480 }
           }
         >
@@ -278,6 +318,8 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
                   icon={p.logo}
                   CustomIcon={!p.logo ? Box : undefined}
                   onClick={() => openWindow(`app-${p.id}`, 'app', { title: p.name, project: p })}
+                  onMouseEnter={() => handleAppHover(p)}
+                  onMouseLeave={() => handleAppHover(null)}
                 />
               ))}
             </WindowContentGrid>
@@ -287,6 +329,16 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
           )}
           {win.type === 'about' && (
             <AboutMonad />
+          )}
+          {win.type === 'settings' && (
+            <Settings 
+              typingBoxesEnabled={typingBoxesEnabled}
+              onToggleTypingBoxes={handleToggleTypingBoxes}
+              typingSoundEnabled={typingSoundEnabled}
+              onToggleTypingSound={handleToggleTypingSound}
+              isMusicPlaying={isMusicPlaying}
+              onToggleMusic={onToggleMusic}
+            />
           )}
         </Window>
       ))}
@@ -298,6 +350,8 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
         isMusicPlaying={isMusicPlaying}
         onToggleMusic={onToggleMusic}
         onOpenSpecial={handleOpenSpecial}
+        typingSoundEnabled={typingSoundEnabled}
+        onToggleTypingSound={handleToggleTypingSound}
       />
     </DesktopContainer>
   );

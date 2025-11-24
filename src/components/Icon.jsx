@@ -188,7 +188,7 @@ const PixelAppIcon = ({ src, fallbackIcon: Fallback }) => {
     return <Fallback size={32} color="#ccc" />;
 };
 
-export const Icon = ({ label, icon, onClick, selected, color, CustomIcon, isFolder }) => {
+export const Icon = ({ label, icon, onClick, selected, color, CustomIcon, isFolder, onMouseEnter, onMouseLeave }) => {
   // Decide which icon to render
   let RenderedIcon;
   
@@ -216,7 +216,7 @@ export const Icon = ({ label, icon, onClick, selected, color, CustomIcon, isFold
   }
 
   return (
-    <IconWrapper onClick={onClick} selected={selected}>
+    <IconWrapper onClick={onClick} selected={selected} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       <IconImage selected={selected}>
         {RenderedIcon}
       </IconImage>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { Volume2, VolumeX, Wifi, Battery, ChevronRight, Power, Disc, Info, Folder } from 'lucide-react';
+import { Volume2, VolumeX, Wifi, Battery, ChevronRight, Power, Disc, Info, Folder, Type, Settings } from 'lucide-react';
 
 const TaskbarContainer = styled.div`
   position: fixed;
@@ -171,7 +171,7 @@ const Clock = () => {
   return <span>{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>;
 };
 
-export const Taskbar = ({ windows, activeWindowId, onWindowClick, onToggleMusic, isMusicPlaying, onOpenSpecial }) => {
+export const Taskbar = ({ windows, activeWindowId, onWindowClick, onToggleMusic, isMusicPlaying, onOpenSpecial, typingSoundEnabled, onToggleTypingSound, typingBoxesEnabled, onToggleTypingBoxes }) => {
   const [startOpen, setStartOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -199,6 +199,11 @@ export const Taskbar = ({ windows, activeWindowId, onWindowClick, onToggleMusic,
       setStartOpen(false);
   };
 
+  const handleSettings = () => {
+      onOpenSpecial('settings');
+      setStartOpen(false);
+  };
+
   return (
     <TaskbarContainer>
       <div ref={menuRef}>
@@ -212,12 +217,12 @@ export const Taskbar = ({ windows, activeWindowId, onWindowClick, onToggleMusic,
             <div style={{ display: 'flex' }}>
               <MenuSidebar><span>MONAD XP</span></MenuSidebar>
               <MenuContent>
-                <MenuItem onClick={() => { onToggleMusic(); setStartOpen(false); }}>
-                    <Disc /> 
-                    {isMusicPlaying ? 'Stop Music' : 'Play Music'}
-                </MenuItem>
                 <MenuItem onClick={handleAbout}>
                     <Info /> About Monad
+                </MenuItem>
+                <Divider />
+                <MenuItem onClick={handleSettings}>
+                    <Settings /> Settings
                 </MenuItem>
                 <Divider />
                 <MenuItem onClick={handlePrograms}>
@@ -248,6 +253,9 @@ export const Taskbar = ({ windows, activeWindowId, onWindowClick, onToggleMusic,
       <SystemTray>
         <div onClick={onToggleMusic} style={{cursor: 'pointer'}}>
             {isMusicPlaying ? <Volume2 size={16} /> : <VolumeX size={16} />}
+        </div>
+        <div onClick={onToggleTypingSound} style={{cursor: 'pointer', display: 'flex', alignItems: 'center'}} title={typingSoundEnabled ? 'Disable typing sound' : 'Enable typing sound'}>
+            <Type size={16} style={{ opacity: typingSoundEnabled ? 1 : 0.5 }} />
         </div>
         <Clock />
       </SystemTray>
