@@ -14,6 +14,10 @@ const WindowContainer = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    border-width: 1px;
+  }
 `;
 
 const TitleBar = styled.div`
@@ -30,6 +34,12 @@ const TitleBar = styled.div`
   font-size: 16px;
   letter-spacing: 1px;
   user-select: none;
+
+  @media (max-width: 768px) {
+    height: 36px;
+    font-size: 14px;
+    padding: 0 8px;
+  }
 `;
 
 const TitleText = styled.div`
@@ -38,6 +48,15 @@ const TitleText = styled.div`
   gap: 5px;
   font-weight: bold;
   padding-left: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 `;
 
 const Controls = styled.div`
@@ -73,34 +92,79 @@ const Content = styled.div`
   overflow: auto;
   position: relative;
   padding: 2px;
+  -webkit-overflow-scrolling: touch;
+
+  @media (max-width: 768px) {
+    padding: 8px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 `;
 
 export const Window = ({ 
   id, title, children, isActive, isMaximized, onClose, onFocus, onMinimize, onMaximize, defaultSize, defaultPosition 
 }) => {
-  const [position, setPosition] = useState({
-    x: defaultPosition?.x || 100,
-    y: defaultPosition?.y || 50
-  });
-  const [size, setSize] = useState({
-    width: defaultSize?.width || 600,
-    height: defaultSize?.height || 400
-  });
+  const getIsMobile = () => typeof window !== 'undefined' && window.innerWidth <= 768;
+  
+  // Calculate responsive default size and position
+  const getDefaultSize = () => {
+    if (getIsMobile()) {
+      return {
+        width: window.innerWidth,
+        height: window.innerHeight - 40 // Account for taskbar
+      };
+    }
+    return defaultSize || { width: 600, height: 400 };
+  };
+
+  const getDefaultPosition = () => {
+    if (getIsMobile()) {
+      return { x: 0, y: 0 };
+    }
+    return defaultPosition || { x: 100, y: 50 };
+  };
+
+  const [position, setPosition] = useState(getDefaultPosition());
+  const [size, setSize] = useState(getDefaultSize());
   const [savedPosition, setSavedPosition] = useState(null);
   const [savedSize, setSavedSize] = useState(null);
+  const [isMobile, setIsMobile] = useState(getIsMobile());
+
+  useEffect(() => {
+    const mobile = getIsMobile();
+    setIsMobile(mobile);
+    
+    if (mobile) {
+      // On mobile, always fullscreen
+      setPosition({ x: 0, y: 0 });
+      setSize({ width: window.innerWidth, height: window.innerHeight - 40 });
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+      if (mobile || isMaximized) {
+        setPosition({ x: 0, y: 0 });
+        setSize({ width: window.innerWidth, height: window.innerHeight - 40 });
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (isMaximized) {
       // Save current position and size before maximizing
-      if (!savedPosition) {
-        setSavedPosition(position);
-        setSavedSize(size);
-      }
+      setSavedPosition(prev => prev || position);
+      setSavedSize(prev => prev || size);
       // Maximize to full screen (minus taskbar)
       setPosition({ x: 0, y: 0 });
       setSize({ width: window.innerWidth, height: window.innerHeight - 40 });
-    } else if (savedPosition && savedSize) {
-      // Restore saved position and size
+    } else if (savedPosition && savedSize && !isMobile) {
+      // Restore saved position and size (only on desktop)
       setPosition(savedPosition);
       setSize(savedSize);
       setSavedPosition(null);
@@ -141,11 +205,13 @@ export const Window = ({
           setPosition({ x: position.x, y: position.y });
         }
       }}
-      minWidth={isMaximized ? undefined : 300}
-      minHeight={isMaximized ? undefined : 200}
+      minWidth={isMaximized || isMobile ? undefined : 300}
+      minHeight={isMaximized || isMobile ? undefined : 200}
+      maxWidth={isMobile ? window.innerWidth : undefined}
+      maxHeight={isMobile ? window.innerHeight - 40 : undefined}
       bounds="parent"
-      disableDragging={isMaximized}
-      disableResizing={isMaximized}
+      disableDragging={isMaximized || isMobile}
+      disableResizing={isMaximized || isMobile}
       onDragStart={onFocus}
       onClick={onFocus}
       dragHandleClassName="window-handle"

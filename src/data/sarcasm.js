@@ -35,6 +35,23 @@ export const getSarcasticComment = (project) => {
   const description = project.description || '';
   const category = project.category || '';
 
+  // Special Discovery North Star comments
+  if (id === 'discovery' || name === 'Discovery' || name === 'Discovery - Your North Star') {
+    const comments = [
+      "Your North Star to navigate the Monad universe. Find your next dApp.",
+      "The compass that guides you through thousands of apps. Discovery awaits.",
+      "Navigate the Monad ecosystem with AI-powered recommendations.",
+      "Your personal guide to finding the perfect dApp. Let the stars align.",
+      "Discover apps you never knew existed. The universe of Monad awaits.",
+      "Smart recommendations powered by your behavior. Your journey starts here.",
+      "The North Star of Monad. Every great explorer needs a guide.",
+      "Unlock achievements, discover trends, and find your next favorite app.",
+      "3D visualizations, network graphs, and smart search. All in one place.",
+      "Your gateway to the entire Monad ecosystem. Start exploring now."
+    ];
+    return getRandomUnused(comments, 'discovery');
+  }
+
   // Folder comments
   if (id === 'defi' || name === 'DeFi') {
     const comments = [

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { ExternalLink, Twitter, Globe, Heart } from 'lucide-react';
+import { trackUserBehavior } from '../utils/recommendationEngine';
+import { checkAchievements } from '../utils/gamification';
 
 const DetailContainer = styled.div`
   padding: 4px;
@@ -9,6 +11,11 @@ const DetailContainer = styled.div`
   height: 100%;
   background: ${props => props.theme.colors.winBackground};
   color: ${props => props.theme.colors.text};
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding: 8px;
+  }
 `;
 
 const BannerFrame = styled.div`
@@ -26,6 +33,10 @@ const Banner = styled.div`
   background-size: cover;
   background-position: center;
   image-rendering: pixelated; /* Retro filtering */
+
+  @media (max-width: 768px) {
+    height: 100px;
+  }
 `;
 
 const Header = styled.div`
@@ -42,6 +53,10 @@ const Title = styled.h1`
   font-size: 20px;
   color: ${props => props.theme.colors.primary};
   text-shadow: 1px 1px 0px #fff;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 `;
 
 const TypeBadge = styled.span`
@@ -67,12 +82,26 @@ const Description = styled.div`
   border: 2px solid;
   border-color: #999 #fff #fff #999;
   white-space: pre-wrap;
+  -webkit-overflow-scrolling: touch;
+  word-wrap: break-word;
+  overflow-x: hidden;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+    padding: 8px;
+    line-height: 1.5;
+  }
 `;
 
 const ButtonGroup = styled.div`
   display: flex;
   gap: 8px;
   padding-top: 5px;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    gap: 6px;
+  }
 `;
 
 const RetroButton = styled.button`
@@ -141,12 +170,19 @@ export const AppDetail = ({ project }) => {
 
   const toggleFavorite = () => {
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-    const newFavorites = isFavorite
-      ? favorites.filter(id => id !== project.id)
-      : [...favorites, project.id];
+    const newIsFavorite = !isFavorite;
+    const newFavorites = newIsFavorite
+      ? [...favorites, project.id]
+      : favorites.filter(id => id !== project.id);
     
     localStorage.setItem('favorites', JSON.stringify(newFavorites));
-    setIsFavorite(!isFavorite);
+    setIsFavorite(newIsFavorite);
+    
+    // Track favorite behavior
+    trackUserBehavior.trackFavorite(project.id, newIsFavorite);
+    
+    // Check for achievements
+    checkAchievements();
     
     // Dispatch custom event to notify Desktop component
     window.dispatchEvent(new Event('favoritesUpdated'));

@@ -47,6 +47,37 @@ const IconImage = styled.div`
     height: 100%;
     filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.5));
   }
+  
+  /* Special styling for Discovery folder with glowing star */
+  ${props => props.isDiscovery && `
+    &::after {
+      content: '';
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      width: 24px;
+      height: 24px;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2 L14 8 L20 8 L15.5 12 L17 18 L12 15 L7 18 L8.5 12 L4 8 L10 8 Z' fill='%23836ef9' stroke='%23fff' stroke-width='1'/%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
+      filter: drop-shadow(0 0 8px rgba(131, 110, 249, 0.8)) drop-shadow(0 0 12px rgba(131, 110, 249, 0.6));
+      animation: starPulse 2s ease-in-out infinite;
+      z-index: 10;
+    }
+  `}
+  
+  @keyframes starPulse {
+    0%, 100% { 
+      transform: scale(1);
+      opacity: 0.9;
+      filter: drop-shadow(0 0 8px rgba(131, 110, 249, 0.8)) drop-shadow(0 0 12px rgba(131, 110, 249, 0.6));
+    }
+    50% { 
+      transform: scale(1.2);
+      opacity: 1;
+      filter: drop-shadow(0 0 12px rgba(131, 110, 249, 1)) drop-shadow(0 0 20px rgba(131, 110, 249, 0.8));
+    }
+  }
 `;
 
 const IconLabel = styled.span`
@@ -181,6 +212,22 @@ const PixelCommunityFolderIcon = () => (
   </svg>
 );
 
+const PixelDiscoveryFolderIcon = () => (
+  <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* Back of folder */}
+    <path d="M2 6H12L14 8H30V26H2V6Z" fill="#E8C766" stroke="black" strokeWidth="1"/>
+    {/* Front of folder (lighter) */}
+    <path d="M2 10H30V26H2V10Z" fill="#FFD700" stroke="black" strokeWidth="1"/>
+    {/* Tab highlight */}
+    <path d="M3 11H29V25H3V11Z" fill="#FFE66D" fillOpacity="0.5"/>
+    {/* Sparkles/Stars icon overlay */}
+    <circle cx="12" cy="16" r="1.5" fill="#836ef9" stroke="#000" strokeWidth="0.3"/>
+    <circle cx="20" cy="14" r="1.5" fill="#836ef9" stroke="#000" strokeWidth="0.3"/>
+    <circle cx="16" cy="20" r="1.5" fill="#836ef9" stroke="#000" strokeWidth="0.3"/>
+    <path d="M16 12 L17 15 L20 15 L17.5 17 L18.5 20 L16 18 L13.5 20 L14.5 17 L12 15 L15 15 Z" fill="#836ef9" stroke="#fff" strokeWidth="0.5"/>
+  </svg>
+);
+
 const PixelAppIcon = ({ src, fallbackIcon: Fallback }) => {
     if (src) {
         return <img src={src} alt="icon" onError={(e) => {e.target.style.display='none';}} />;
@@ -191,6 +238,7 @@ const PixelAppIcon = ({ src, fallbackIcon: Fallback }) => {
 export const Icon = ({ label, icon, onClick, selected, color, CustomIcon, isFolder, onMouseEnter, onMouseLeave }) => {
   // Decide which icon to render
   let RenderedIcon;
+  const isDiscovery = label === 'Discovery';
   
   if (CustomIcon) {
       // CustomIcon takes priority, even for folders
@@ -208,6 +256,8 @@ export const Icon = ({ label, icon, onClick, selected, color, CustomIcon, isFold
         RenderedIcon = <PixelNFTFolderIcon />;
       } else if (label === 'Community') {
         RenderedIcon = <PixelCommunityFolderIcon />;
+      } else if (label === 'Discovery') {
+        RenderedIcon = <PixelDiscoveryFolderIcon />;
       } else {
         RenderedIcon = <PixelFolderIcon />;
       }
@@ -217,7 +267,7 @@ export const Icon = ({ label, icon, onClick, selected, color, CustomIcon, isFold
 
   return (
     <IconWrapper onClick={onClick} selected={selected} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-      <IconImage selected={selected}>
+      <IconImage selected={selected} isDiscovery={isDiscovery}>
         {RenderedIcon}
       </IconImage>
       <IconLabel selected={selected}>{label}</IconLabel>

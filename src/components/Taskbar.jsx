@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { Volume2, VolumeX, Wifi, Battery, ChevronRight, Power, Disc, Info, Folder, Type, Settings } from 'lucide-react';
+import { Volume2, VolumeX, Wifi, Battery, ChevronRight, Power, Disc, Info, Folder, Type, Settings, Sparkles } from 'lucide-react';
 
 const TaskbarContainer = styled.div`
   position: fixed;
@@ -204,6 +204,11 @@ export const Taskbar = ({ windows, activeWindowId, onWindowClick, onToggleMusic,
       setStartOpen(false);
   };
 
+  const handleDiscovery = () => {
+      onOpenSpecial('discovery');
+      setStartOpen(false);
+  };
+
   return (
     <TaskbarContainer>
       <div ref={menuRef}>
@@ -219,6 +224,10 @@ export const Taskbar = ({ windows, activeWindowId, onWindowClick, onToggleMusic,
               <MenuContent>
                 <MenuItem onClick={handleAbout}>
                     <Info /> About Monad
+                </MenuItem>
+                <Divider />
+                <MenuItem onClick={handleDiscovery}>
+                    <Sparkles /> Discovery
                 </MenuItem>
                 <Divider />
                 <MenuItem onClick={handleSettings}>

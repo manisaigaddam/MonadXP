@@ -7,7 +7,9 @@ import { AppDetail } from './AppDetail';
 import { AboutMonad } from './AboutMonad';
 import { Settings } from './Settings';
 import { KeoneHacker } from './KeoneHacker';
-import { TrendingUp, Cpu, Gamepad2, Globe, Folder, Box, Heart } from 'lucide-react';
+import { DiscoveryWindow } from './DiscoveryWindow';
+import { trackUserBehavior } from '../utils/recommendationEngine';
+import { TrendingUp, Cpu, Gamepad2, Globe, Folder, Box, Heart, Sparkles } from 'lucide-react';
 import db from '../data/db.json';
 
 // Pulse animation for watermark
@@ -17,9 +19,40 @@ const pulse = keyframes`
   100% { opacity: 0.15; transform: translate(-50%, -50%) scale(1); }
 `;
 
+// North Star animations
+const starPulse = keyframes`
+  0% { 
+    transform: scale(1);
+    filter: drop-shadow(0 0 8px rgba(131, 110, 249, 0.8));
+  }
+  50% { 
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 20px rgba(131, 110, 249, 1)) drop-shadow(0 0 30px rgba(131, 110, 249, 0.6));
+  }
+  100% { 
+    transform: scale(1);
+    filter: drop-shadow(0 0 8px rgba(131, 110, 249, 0.8));
+  }
+`;
+
+const sparkleRotate = keyframes`
+  0% { transform: rotate(0deg) scale(1); opacity: 0.8; }
+  50% { transform: rotate(180deg) scale(1.2); opacity: 1; }
+  100% { transform: rotate(360deg) scale(1); opacity: 0.8; }
+`;
+
+const sparkleFloat = keyframes`
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  25% { transform: translateY(-8px) translateX(4px); }
+  50% { transform: translateY(-4px) translateX(-4px); }
+  75% { transform: translateY(-8px) translateX(2px); }
+`;
+
 const DesktopContainer = styled.div`
   width: 100vw;
   height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
   background-color: ${props => props.theme.colors.desktopBg};
   
   /* The Grid Pattern */
@@ -30,6 +63,11 @@ const DesktopContainer = styled.div`
   background-position: center;
   position: relative;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
   
   /* Centered Logo Watermark - Glowing and more visible */
   &::before {
@@ -49,6 +87,13 @@ const DesktopContainer = styled.div`
     pointer-events: none;
     z-index: 0;
     animation: ${pulse} 8s infinite ease-in-out;
+
+    @media (max-width: 768px) {
+      width: 100vw;
+      height: 100vw;
+      max-width: 400px;
+      max-height: 400px;
+    }
   }
 
   /* Wallpaper Overlay - Cool Boundary Glow Effect */
@@ -85,6 +130,15 @@ const IconGrid = styled.div`
   align-content: flex-start;
   position: relative;
   z-index: 1;
+
+  @media (max-width: 768px) {
+    padding: 20px 10px;
+    gap: 8px;
+    height: calc(100vh - 40px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 `;
 
 const WindowContentGrid = styled.div`
@@ -94,7 +148,9 @@ const WindowContentGrid = styled.div`
   padding: 16px;
 `;
 
+
 const CATEGORIES = [
+  { id: 'discovery', label: 'Discovery', icon: Sparkles },
   { id: 'defi', label: 'DeFi', icon: TrendingUp },
   { id: 'infra', label: 'Infra', icon: Cpu },
   { id: 'nfts', label: 'NFTs & Gaming', icon: Gamepad2 },
@@ -122,6 +178,8 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
 
   useEffect(() => {
     setProjects(db);
+    // Store all projects in localStorage for gamification
+    localStorage.setItem('allProjects', JSON.stringify(db));
   }, []);
 
   // Listen for storage changes to update favorites
@@ -170,7 +228,9 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
       type,
       title: data.title || id,
       data,
-      defaultPosition: { x: 50 + (windows.length * 30), y: 30 + (windows.length * 30) },
+      defaultPosition: typeof window !== 'undefined' && window.innerWidth <= 768
+        ? { x: 0, y: 0 }
+        : { x: 50 + (windows.length * 30), y: 30 + (windows.length * 30) },
       minimized: false,
       maximized: false,
       savedPosition: null,
@@ -179,6 +239,13 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
 
     setWindows([...windows, newWindow]);
     setActiveWindowId(id);
+  };
+
+  // Handle app click from Discovery window
+  const handleDiscoveryAppClick = (app) => {
+    trackUserBehavior.trackClick(app.id);
+    trackUserBehavior.trackView(app.id);
+    openWindow(`app-${app.id}`, 'app', { title: app.name, project: app });
   };
 
   const closeWindow = (id) => {
@@ -248,6 +315,8 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
           openWindow('settings', 'settings', { title: 'Settings' });
       } else if (action === 'all-projects') {
           openWindow('all-projects', 'folder', { title: 'All Programs', category: 'all' });
+      } else if (action === 'discovery') {
+          openWindow('discovery', 'discovery', { title: 'Discovery - Find Your Next dApp' });
       }
   };
 
@@ -283,7 +352,13 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
             key={cat.id}
             label={cat.label}
             isFolder={true}
-            onClick={() => openWindow(cat.id, 'folder', { title: cat.label, category: cat.id })}
+            onClick={() => {
+              if (cat.id === 'discovery') {
+                openWindow('discovery', 'discovery', { title: 'Discovery - Find Your Next dApp' });
+              } else {
+                openWindow(cat.id, 'folder', { title: cat.label, category: cat.id });
+              }
+            }}
             onMouseEnter={() => handleAppHover({ id: cat.id, name: cat.label })}
             onMouseLeave={() => handleAppHover(null)}
           />
@@ -303,10 +378,13 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
           onMaximize={maximizeWindow}
           defaultPosition={win.defaultPosition}
           defaultSize={
-            win.type === 'app' ? { width: 400, height: 500 } : 
-            win.type === 'about' ? { width: 550, height: 600 } :
-            win.type === 'settings' ? { width: 600, height: 500 } :
-            { width: 640, height: 480 }
+            typeof window !== 'undefined' && window.innerWidth <= 768
+              ? { width: window.innerWidth, height: window.innerHeight - 40 }
+              : win.type === 'app' ? { width: 400, height: 500 } : 
+                win.type === 'about' ? { width: 550, height: 600 } :
+                win.type === 'settings' ? { width: 600, height: 500 } :
+                win.type === 'discovery' ? { width: 900, height: 700 } :
+                { width: 640, height: 480 }
           }
         >
           {win.type === 'folder' && (
@@ -317,8 +395,15 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
                   label={p.name}
                   icon={p.logo}
                   CustomIcon={!p.logo ? Box : undefined}
-                  onClick={() => openWindow(`app-${p.id}`, 'app', { title: p.name, project: p })}
-                  onMouseEnter={() => handleAppHover(p)}
+                  onClick={() => {
+                    trackUserBehavior.trackClick(p.id);
+                    trackUserBehavior.trackView(p.id);
+                    openWindow(`app-${p.id}`, 'app', { title: p.name, project: p });
+                  }}
+                  onMouseEnter={() => {
+                    trackUserBehavior.trackView(p.id);
+                    handleAppHover(p);
+                  }}
                   onMouseLeave={() => handleAppHover(null)}
                 />
               ))}
@@ -339,6 +424,9 @@ export const Desktop = ({ isMusicPlaying, onToggleMusic }) => {
               isMusicPlaying={isMusicPlaying}
               onToggleMusic={onToggleMusic}
             />
+          )}
+          {win.type === 'discovery' && (
+            <DiscoveryWindow onAppClick={handleDiscoveryAppClick} />
           )}
         </Window>
       ))}
